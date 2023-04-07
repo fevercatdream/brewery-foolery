@@ -1,0 +1,197 @@
+:root {
+    --color-black: black;
+    --color-cool-gray: #8D909B;
+    --color-platinum: #D9D7DD;
+    --color-darker-drab-dark-brown: #3D3522;
+    --color-drab-dark-brown: #4A442D;
+    --color-dark-green: #172815;
+    --color-dark-moss-green: #3E5622;
+    --color-keppel: #58B09C;
+    --color-mindaro: #C5D86D;
+    --color-Nyanza: #CAF7E2;
+    --color-ultra-violet: #6C698D;
+    --color-pale-dogwood: #D3C1C3;
+    --color-coquelicot: #F15025;
+    --color-vanilla: #FEFCAD;
+    --color-white: white;
+
+    --text-shadow-black: 1px 1px 1px var(--color-black), -1px -1px 1px var(--color-black);
+    --text-shadow-black-green: 1px 1px 1px var(--color-black), -1px -1px 1px var(--color-mindaro);
+    --text-shadow-black-green-thin: 0.5px 0.5px 1px var(--color-black), -0.5px -0.5px 1px var(--color-mindaro);
+
+    --box-shadow-color-ultra-violet: 1px 1px 5px var(--color-ultra-violet);
+
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--color-pale-dogwood);
+}
+
+.card {
+    background: var(--color-vanilla);
+}
+
+#header {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-dark-moss-green);
+    padding: 20px 0 10px 0;
+}
+
+#header h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    text-align: center;
+    color: var(--color-white);
+    text-shadow: var(--text-shadow-black-green);
+
+}
+
+#search-container-id {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 20px;
+}
+
+#search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-platinum);
+}
+
+#search-bar:hover {
+    box-shadow: var(--box-shadow-color-ultra-violet);
+}
+
+#search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    background-color: var(--color-mindaro);
+    color: var(--color-dark-green);
+    font-weight: 700;
+}
+
+#search-button:hover {
+    color: var(--color-ultra-violet);
+    border: 1px solid var(--color-dark-green);
+}
+
+#content-container {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    text-align: left;
+    font-size: 1.25em;
+    padding: 20px;
+}
+
+#content-container-search-results {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+#content-container-no-results {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 20px;
+    margin: 20px auto;
+    width: 400px;
+    font-weight: 500;
+}
+
+#content-container-no-results p {
+    line-height: 2em;
+}
+
+#content-container-no-results ul {
+    padding-left: 30px;
+    list-style-type: circle;
+}
+
+#content-container-no-results img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 20px;
+  }
+
+#content-container-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#content-container-error img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    padding: 10px;
+}
+
+#pagination-id {
+    padding: 1.5rem;
+}
+
+#pagination-previous-id {
+    background-color: var(--color-mindaro);
+    color: var(--color-dark-green);
+    font-weight: 700;
+}
+
+#pagination-previous-id:hover {
+    color: var(--color-ultra-violet);
+    border: 1px solid var(--color-dark-green);
+}
+
+#pagination-next-id {
+    background-color: var(--color-mindaro);
+    color: var(--color-dark-green);
+    font-weight: 700;
+}
+
+#pagination-next-id:hover {
+    color: var(--color-ultra-violet);
+    border: 1px solid var(--color-dark-green);
+}
+
+.pagination-link {
+    background-color: var(--color-platinum);
+}
+
+#current-pagination-id {
+    background-color: var(--color-dark-moss-green);
+    color: var(--color-white);
+}
+
+#current-pagination-id:hover {
+    color: var(--color-mindaro);
+    border: 1px solid var(--color-dark-green);
+    box-shadow: var(--box-shadow-color-ultra-violet);
+}
+
+#footer {
+    background: var(--color-pale-dogwood);
+    color: var(--color-dark-green);
+    text-shadow: var(--text-shadow-black-green-thin);
+    letter-spacing: 1px;
+}
