@@ -11,6 +11,7 @@
     --color-Nyanza: #CAF7E2;
     --color-ultra-violet: #6C698D;
     --color-pale-dogwood: #D3C1C3;
+    --color-red: red;
     --color-coquelicot: #F15025;
     --color-vanilla: #FEFCAD;
     --color-white: white;
@@ -194,4 +195,25 @@ body {
     color: var(--color-dark-green);
     text-shadow: var(--text-shadow-black-green-thin);
     letter-spacing: 1px;
+}
+
+#modal-head-id {
+    background: var(--color-dark-moss-green);
+    color: var(--color-platinum);
+}
+
+#modal-title-id {
+    color: var(--color-platinum);
+}
+
+#modal-close {
+    background-color: var(--color-red);
+}
+
+#modal-body-id {
+    background-color: var(--color-mindaro);
+}
+
+#modal-foot-id {
+    background-color: var(--color-dark-moss-green);
 }
