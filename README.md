@@ -25,12 +25,12 @@ N/A
 
 
 ### Deployed Site
-
+https://fevercatdream.github.io/project-1/
 
 <br />
 
 ### Wireframe
-![wireframe](./assets/images/wireframe-diff-page-views.png)
+![wireframe](./assets/images/wireframe-diff-page-views-brewery-info.png)
 
 <br />
 
