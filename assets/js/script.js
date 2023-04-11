@@ -98,10 +98,17 @@ function closeModal() {
 
 //these variables are sample user input data to test the functions-->
 var stateUserInput = "washington";
-var stateUserInputReplaceSpaces = stateUserInput.replace(/ /g, "_");
+var stateUserInputReplaceSpaces = stateUserInput.replace(/ /g, "_").trim();
 var cityUserInput = "seattle";
-var cityUserInputReplaceSpaces = cityUserInput.replace(/ /g, "_");
+var cityUserInputReplaceSpaces = cityUserInput.replace(/ /g, "_").trim();
 var zipcodeUserInput = "98022";
+
+function getOption() {
+  userSearchSelection = document.querySelector("#dropdown-choice");
+  output = userSearchSelection.value;
+  console.log(output);
+  return output;
+}
 
 //these variables allow us to change the url input into our fetch commands to filter based on which criteria user inputted
 var stateRequestUrl =
@@ -319,10 +326,18 @@ function fetchZipCodeData() {
 
 var brewSearchBtn = document.querySelector("#search-button");
 
-brewSearchBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-  var brewSearchValue = document.getElementById("search-bar").value;
-  console.log(brewSearchValue);
+brewSearchBtn.addEventListener("click", function () {
+  //   var brewSearchValue = document.getElementById("search-bar").value;
+  //   console.log(brewSearchValue);
+  var dropdownMenuOutput = getOption();
+  console.log(output);
+  if (dropdownMenuOutput === "state") {
+    fetchStateData();
+  } else if (dropdownMenuOutput === "city") {
+    fetchCityData();
+  } else {
+    fetchZipCodeData();
+  }
 });
 
 //-------tasks still needed to be completed------------:
