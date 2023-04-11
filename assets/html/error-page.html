@@ -7,13 +7,25 @@
     <link rel="stylesheet" href="../css/reset.css" />
     <link rel="stylesheet" href="../css/bulma.min.css" />
     <link rel="stylesheet" href="../css/style.css" />
-    <title>Gardening Info</title>
+    <title>Brewery Foolery</title>
 </head>
 <body>
     <header id="header">
-        <h1>Gardening Info</h1>
+        <h1>Brewery Foolery</h1>
+        <nav>
+          <ul>
+              <li><a href="./bar-trivia-questions.html">Bar Trivia Questions</a></li>
+        </ul>
+      </nav>
     </header>
         <form id="search-container-id" class="search-container">
+          <div class="select">
+            <select>
+              <option>City</option>
+              <option>State</option>
+              <option>Zipcode</option>
+            </select>
+          </div>
           <input id="search-bar" type="text" placeholder="Search.." name="search">
           <input id="search-button" class="button" type="submit" value="Submit"></input>
         </form>

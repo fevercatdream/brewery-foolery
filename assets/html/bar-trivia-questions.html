@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/bulma.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Bar Trivia Questions</title>
+</head>
+<body>
+    <header id="header">
+        <h1>Bar Trivia Questions</h1>
+        <h2>Play with Friends</h2>
+        <nav>
+            <ul>
+                <li><a href="../../index.html">Brewery Search</a></li>
+            </ul>
+        </nav>
+    </header>
+        <form id="search-container-id" class="search-container">
+          <div class="select">
+            <select>
+              <option>Arts & Literature</option>
+              <option>Film & TV</option>
+              <option>Food & Drink</option>
+              <option>General Knowledge</option>
+              <option>Geography</option>
+              <option>History</option>
+              <option>Music</option>
+              <option>Science</option>
+              <option>Society & Culture</option>
+              <option>Sport & Leisure</option>
+            </select>
+          </div>
+          <input id="play-btn" class="button" type="submit" value="Play"></input>
+        </form>
+        <section id="content-container-trivia-q">
+          <div id="trivia-question">
+            <p>Which of these quotes is from the film "The Shining"?</p>
+            <p>
+              Options:</p>
+          </div>
+          <div id="trivia-possible-answers">
+            <p>Nobody puts baby in a corner.</p>
+            <p>Here's Johnny!</p>
+            <p>Yo, Adrian!</p>
+            <p>Rosebud.</p>
+          </div>
+          <div id="correct-answer" class="hidden">
+            <h3>Correct Answer:</h3>
+            <p>Here's Johnny!</p>
+          </div>
+          <input id="correct-answer-btn" class="button" type="submit" value="Correct Answer"></input>
+          <input id="next-question-btn" class="button" type="submit" value="Next Question"></input>
+        </section>
+    <footer id="footer">
+        <div class="content has-text-centered">
+          <p>
+            Project 1 created by Abi Kumagai, Thalissa Valery, and Ryan Feeney Wood
+          </p>
+        </div>
+    </footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>
