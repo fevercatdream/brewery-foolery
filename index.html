@@ -7,20 +7,31 @@
     <link rel="stylesheet" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/bulma.min.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <title>Gardening Info</title>
+    <title>Brewery Foolery</title>
 </head>
 <body>
     <header id="header">
-        <h1>Gardening Info</h1>
+        <h1>Brewery Foolery</h1>
+        <nav>
+            <ul>
+                <li><a href="./assets/html/bar-trivia-questions.html" target="_blank" rel="noopener">Bar Trivia Questions</a></li>
+            </ul>
+        </nav>
     </header>
         <form id="search-container-id" class="search-container">
-          <input id="search-bar" type="text" placeholder="Search.." name="search">
-          <input id="search-button" class="button" type="submit" value="Submit"></input>
+            <div class="select">
+                <select>
+                  <option>City</option>
+                  <option>State</option>
+                  <option>Zipcode</option>
+                </select>
+            </div>
+            <input id="search-bar" type="text" placeholder="Search.." name="search">
+            <input id="search-button" class="button" type="submit" value="Submit"></input>
         </form>
         <section id="content-container">
             <p>
-                USDA Plant Hardiness Zone for a zip code. <br />
-                Enter a zip code to find plants that work for your location.
+                Enter city, state, or zipcode to find breweries nearby.
             </p>
         </section>
     <footer id="footer">
