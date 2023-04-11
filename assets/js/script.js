@@ -16,7 +16,7 @@ function openModal() {
 function closeModal() {
   modalEl.classList.remove("is-active");
 }
-//
+
 //
 //function?(start ith just getting the fetch command and changing it for each criteria) for querying brewery API
 // ----
@@ -145,6 +145,38 @@ function fetchTriviaData() {
     });
 }
 
+// ------------------event listeners--------------------
+//commented out cause they throw errors without ID's being on same page
+
+var showCorrectAnswerBtn = document.querySelector("#correct-answer-btn");
+var nextQuestionBtn = document.querySelector("#next-question-btn");
+var playTriviaBtn = document.querySelector("#play-btn");
+
+showCorrectAnswerBtn.addEventListener("click", function () {
+  console.log("correct answer button is working!");
+  //need to get data out of fetch requests to complete this function
+  //add render function for that data here as well
+});
+nextQuestionBtn.addEventListener("click", function () {
+  console.log("next question button is working!");
+  //need to get data out of fetch requests to complete this function
+  //add render function for that data here as well
+});
+playTriviaBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  console.log("play button is working!");
+  //need to get data out of fetch requests to complete this function
+  //add render function for that data here as well
+});
+
+var brewSearchBtn = document.querySelector("#search-button");
+
+brewSearchBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  var brewSearchValue = document.getElementById("search-bar").value;
+  console.log(brewSearchValue);
+});
+
 //-------tasks still needed to be completed------------:
 
 //define variables for each element being modified
@@ -200,7 +232,6 @@ function fetchTriviaData() {
 //function for getting value of dropdown menu selection out of dropdown menu
 // -------
 // use this variable to help var triviaCriteriaMenuValue = selectElement.options[selectElement.selectedIndex].value
-// dont use spaces when assigning values to each checkbox
 //
 //
 //
@@ -211,12 +242,4 @@ function fetchTriviaData() {
 //other button renders correct answer below it and adds a subtle animation to click first button to generate new question
 //
 //
-//
-//
-//
-//
-//
-//
-//
-
 //
