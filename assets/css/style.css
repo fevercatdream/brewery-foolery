@@ -177,13 +177,13 @@ nav {
 
 #pagination-previous-id {
     background-color: var(--color-mindaro);
-    color: var(--color-dark-green);
+    color: var(--color-beer-foam-cream);
     font-weight: 700;
 }
 
 #pagination-previous-id:hover {
     color: var(--color-ultra-violet);
-    border: 1px solid var(--color-dark-green);
+    border: 1px solid var(--color-beer-foam-cream);
 }
 
 #pagination-next-id {
@@ -220,22 +220,26 @@ nav {
 }
 
 #modal-head-id {
-    background: var(--color-dark-moss-green);
-    color: var(--color-platinum);
+    background: var(--color-beer-foam-cream);
+    color: var(--color-beer-stout-brow);
 }
 
 #modal-title-id {
-    color: var(--color-platinum);
+    color: var(--color-beer-stout-brown);
 }
 
 #modal-close {
-    background-color: var(--color-red);
+    background-color: var(--color-beer-stout-brown);
 }
 
 #modal-body-id {
-    background-color: var(--color-mindaro);
+    background-color: var(--color-beer-foam-brown);
 }
 
 #modal-foot-id {
-    background-color: var(--color-dark-moss-green);
+    background-color: var(--color-beer-stout-brown);
+}
+
+#prevbutt {
+    background: var(--color-beer-foam-cream);
 }

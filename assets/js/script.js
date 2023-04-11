@@ -1,6 +1,77 @@
-var modalEl = document.querySelector(".modal");
-var modalCloseBtn = document.querySelector("#modal-close");
+// search container
+var searchButton = document.querySelector("#search-button");
+
+// get all elements with class = card
 var cardEls = document.querySelectorAll(".card");
+
+// card 1 search result
+var searchResult1 = document.querySelector("#search-result-1");
+var breweryName1 = document.querySelector("#brewery-name-1");
+var breweryAddress1 = document.querySelector("#brewery-address-1");
+var searchDate1 = document.querySelector("#search-date-1");
+
+// card 2 search result
+var searchResult2 = document.querySelector("#search-result-2");
+var breweryName2 = document.querySelector("#brewery-name-2");
+var breweryAddress2 = document.querySelector("#brewery-address-2");
+var searchDate2 = document.querySelector("#search-date-2");
+
+// card 3 search result
+var searchResult3 = document.querySelector("#search-result-3");
+var breweryName3 = document.querySelector("#brewery-name-3");
+var breweryAddress3 = document.querySelector("#brewery-address-3");
+var searchDate3 = document.querySelector("#search-date-3");
+
+// card 4 search result
+var searchResult4 = document.querySelector("#search-result-4");
+var breweryName4 = document.querySelector("#brewery-name-4");
+var breweryAddress4 = document.querySelector("#brewery-address-4");
+var searchDate4 = document.querySelector("#search-date-4");
+
+// card 5 search result
+var searchResult5 = document.querySelector("#search-result-5");
+var breweryName5 = document.querySelector("#brewery-name-5");
+var breweryAddress5 = document.querySelector("#brewery-address-5");
+var searchDate5 = document.querySelector("#search-date-5");
+
+// card 6 search result
+var searchResult6 = document.querySelector("#search-result-6");
+var breweryName6 = document.querySelector("#brewery-name-6");
+var breweryAddress6 = document.querySelector("#brewery-address-6");
+var searchDate6 = document.querySelector("#search-date-6");
+
+// card 7 search result
+var searchResult7 = document.querySelector("#search-result-7");
+var breweryName7 = document.querySelector("#brewery-name-7");
+var breweryAddress7 = document.querySelector("#brewery-address-7");
+var searchDate7 = document.querySelector("#search-date-7");
+
+// card 8 search result
+var searchResult8 = document.querySelector("#search-result-8");
+var breweryName8 = document.querySelector("#brewery-name-8");
+var breweryAddress8 = document.querySelector("#brewery-address-8");
+var searchDate8 = document.querySelector("#search-date-8");
+
+// card 9 search result
+var searchResult9 = document.querySelector("#search-result-9");
+var breweryName9 = document.querySelector("#brewery-name-9");
+var breweryAddress9 = document.querySelector("#brewery-address-9");
+var searchDate9 = document.querySelector("#search-date-9");
+
+// modal
+var modalEl = document.querySelector(".modal");
+var modalTitleId = document.querySelector("#modal-title-id");
+var modalCloseBtn = document.querySelector("#modal-close");
+var modalTypeOfBrewery = document.querySelector("#modal-type-of-brewery");
+var modalBreweryWebsiteLink = document.querySelector(
+  "#modal-brewery-website-link"
+);
+var modalBreweryAddress = document.querySelector("#modal-brewery-address");
+var modalPhoneNumber = document.querySelector("#modal-phone-number");
+var modalMap = document.querySelector("#modal-map");
+var modalFootId = document.querySelector("#modal-foot-id");
+var modalPrevBtn = document.querySelector("#modal-prev-btn");
+var modalNextBtn = document.querySelector("#modal-next-btn");
 
 for (var i = 0; i < cardEls.length; i++) {
   var cardEl = cardEls[i];
@@ -16,7 +87,7 @@ function openModal() {
 function closeModal() {
   modalEl.classList.remove("is-active");
 }
-//
+
 //
 //function?(start ith just getting the fetch command and changing it for each criteria) for querying brewery API
 // ----
@@ -243,44 +314,16 @@ function fetchZipCodeData() {
     });
 }
 
-//function for fetching trivia questions
-// -----
-//fetches trivia questions based on user input from selector drop menu
-//get appropriate keys and values from return array (question, incorrect answer, correct)
-//stores the questions in variable
-//fetches answers (all answers, concat the incorrect and correct answers together)
-//stores that new array in variable
-//fetch correct answer in it's own variable
+// ------------------event listeners--------------------
+//commented out cause they throw errors without ID's being on same page
 
-//these variables are sample variables to test functions
-triviaUserInput = "arts&literature";
-var userInputLowercase = triviaUserInput.toLocaleLowerCase();
-console.log(userInputLowercase);
+var brewSearchBtn = document.querySelector("#search-button");
 
-var triviaRequestUrl =
-  "https://the-trivia-api.com/api/questions?limit=20&categories=" +
-  userInputLowercase;
-console.log(triviaRequestUrl);
-
-function fetchTriviaData() {
-  fetch(triviaRequestUrl)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-      for (let index = 0; index < data.length; index++) {
-        var correctAnswerProperty = data[index].correctAnswer;
-        var incorrectAnswerProperty = data[index].incorrectAnswers;
-        var questionProperty = data[index].question;
-        console.log(questionProperty);
-        console.log(correctAnswerProperty);
-        console.log(incorrectAnswerProperty);
-
-        //have correct properties located and selected, just need to get them out of function, or create/append from within this function
-      }
-    });
-}
+brewSearchBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  var brewSearchValue = document.getElementById("search-bar").value;
+  console.log(brewSearchValue);
+});
 
 //-------tasks still needed to be completed------------:
 
@@ -334,26 +377,8 @@ function fetchTriviaData() {
 //
 //
 //
-//function for getting value of dropdown menu selection out of dropdown menu
-// -------
-// use this variable to help var triviaCriteriaMenuValue = selectElement.options[selectElement.selectedIndex].value
-// dont use spaces when assigning values to each checkbox
-//
-//
-//
-//function for rendering the question/answers to page
-// ------
-//grab the variables from trivia fetch function
-//add event handler on 2 buttons: one button renders question and concatted answer array
-//other button renders correct answer below it and adds a subtle animation to click first button to generate new question
 //
 //
 //
 //
-//
-//
-//
-//
-//
-
 //
