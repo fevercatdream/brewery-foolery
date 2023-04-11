@@ -1,3 +1,9 @@
+// search container
+var searchButton = document.querySelector("#search-button");
+
+// get all elements with class = card
+var cardEls = document.querySelectorAll(".card");
+
 // card 1 search result
 var searchResult1 = document.querySelector("#search-result-1");
 var breweryName1 = document.querySelector("#brewery-name-1");
@@ -53,17 +59,31 @@ var breweryAddress9 = document.querySelector("#brewery-address-9");
 var searchDate9 = document.querySelector("#search-date-9");
 
 // modal
+var modalEl = document.querySelector(".modal");
 var modalTitleId = document.querySelector("#modal-title-id");
+var modalCloseBtn = document.querySelector("#modal-close");
 var modalTypeOfBrewery = document.querySelector("#modal-type-of-brewery");
 var modalBreweryWebsiteLink = document.querySelector("#modal-brewery-website-link");
 var modalBreweryAddress = document.querySelector("#modal-brewery-address");
 var modalPhoneNumber = document.querySelector("#modal-phone-number");
 var modalMap = document.querySelector("#modal-map");
-var modalFootId = ("#modal-foot-id");
+var modalFootId = document.querySelector("#modal-foot-id");
+var modalPrevBtn = document.querySelector("#modal-prev-btn");
+var modalNextBtn = document.querySelector("#modal-next-btn");
 
-var modalEl = document.querySelector(".modal");
-var modalCloseBtn = document.querySelector("#modal-close");
-var cardEls = document.querySelectorAll(".card");
+// bar trivia page
+var playBtn = document.querySelector("#play-btn");
+var triviaQuestionContainer = document.querySelector("#trivia-question-container");
+var triviaQuestion = document.querySelector("#trivia-question");
+var triviaPossibleAnswers = document.querySelector("#trivia-possible-answers");
+var optAnsA = document.querySelector("#opt-ans-a");
+var optAnsB = document.querySelector("#opt-ans-b");
+var optAnsC = document.querySelector("#opt-ans-c");
+var optAnsD = document.querySelector("#opt-ans-d");
+var correctAnswerContainer = document.querySelector("#correct-answer-container");
+var correctAnswer = document.querySelector("#correct-answer");
+var correctAnswerBtn = document.querySelector("#correct-answer-btn");
+var nextQuestionBtn = document.querySelector("#next-question-btn");
 
 for (var i = 0; i < cardEls.length; i++) {
   var cardEl = cardEls[i];
