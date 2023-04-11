@@ -1,22 +1,22 @@
-// var modalEl = document.querySelector(".modal");
-// var modalCloseBtn = document.querySelector("#modal-close");
-// var cardEls = document.querySelectorAll(".card");
+var modalEl = document.querySelector(".modal");
+var modalCloseBtn = document.querySelector("#modal-close");
+var cardEls = document.querySelectorAll(".card");
 
-// for (var i = 0; i < cardEls.length; i++) {
-//   var cardEl = cardEls[i];
-//   cardEl.addEventListener("click", openModal);
-// }
+for (var i = 0; i < cardEls.length; i++) {
+  var cardEl = cardEls[i];
+  cardEl.addEventListener("click", openModal);
+}
 
-// modalCloseBtn.addEventListener("click", closeModal);
+modalCloseBtn.addEventListener("click", closeModal);
 
-// function openModal() {
-//   modalEl.classList.add("is-active");
-// }
+function openModal() {
+  modalEl.classList.add("is-active");
+}
 
-// function closeModal() {
-//   modalEl.classList.remove("is-active");
-// }
-//
+function closeModal() {
+  modalEl.classList.remove("is-active");
+}
+
 //
 //function?(start ith just getting the fetch command and changing it for each criteria) for querying brewery API
 // ----
@@ -145,6 +145,38 @@ function fetchTriviaData() {
     });
 }
 
+// ------------------event listeners--------------------
+//commented out cause they throw errors without ID's being on same page
+
+var showCorrectAnswerBtn = document.querySelector("#correct-answer-btn");
+var nextQuestionBtn = document.querySelector("#next-question-btn");
+var playTriviaBtn = document.querySelector("#play-btn");
+
+showCorrectAnswerBtn.addEventListener("click", function () {
+  console.log("correct answer button is working!");
+  //need to get data out of fetch requests to complete this function
+  //add render function for that data here as well
+});
+nextQuestionBtn.addEventListener("click", function () {
+  console.log("next question button is working!");
+  //need to get data out of fetch requests to complete this function
+  //add render function for that data here as well
+});
+playTriviaBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  console.log("play button is working!");
+  //need to get data out of fetch requests to complete this function
+  //add render function for that data here as well
+});
+
+var brewSearchBtn = document.querySelector("#search-button");
+
+brewSearchBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  var brewSearchValue = document.getElementById("search-bar").value;
+  console.log(brewSearchValue);
+});
+
 //-------tasks still needed to be completed------------:
 
 //define variables for each element being modified
@@ -211,35 +243,3 @@ function fetchTriviaData() {
 //
 //
 //
-
-// ------------------event listeners--------------------
-//commented out cause they throw errors without ID's being on same page
-
-// var showCorrectAnswerBtn = document.querySelector("#correct-answer-btn");
-// var nextQuestionBtn = document.querySelector("#next-question-btn");
-// var playTriviaBtn = document.querySelector("#play-btn");
-
-// showCorrectAnswerBtn.addEventListener("click", function () {
-//   console.log("correct answer button is working!");
-//   //need to get data out of fetch requests to complete this function
-//   //add render function for that data here as well
-// });
-// nextQuestionBtn.addEventListener("click", function () {
-//   console.log("next question button is working!");
-//   //need to get data out of fetch requests to complete this function
-//   //add render function for that data here as well
-// });
-// playTriviaBtn.addEventListener("click", function (event) {
-//   event.preventDefault();
-//   console.log("play button is working!");
-//   //need to get data out of fetch requests to complete this function
-//   //add render function for that data here as well
-// });
-
-// var brewSearchBtn = document.querySelector("#search-button");
-
-// brewSearchBtn.addEventListener("click", function (event) {
-//   event.preventDefault();
-//   var brewSearchValue = document.getElementById("search-bar").value;
-//   console.log(brewSearchValue);
-// });
