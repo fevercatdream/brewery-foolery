@@ -16,9 +16,6 @@ function openModal() {
 function closeModal() {
   modalEl.classList.remove("is-active");
 }
-
-//define variables for each element being modified
-//
 //
 //
 //function?(start ith just getting the fetch command and changing it for each criteria) for querying brewery API
@@ -27,6 +24,86 @@ function closeModal() {
 //      fetch function for state
 //      fetch function for city
 //      fetch function for zip code
+
+//these variables are sample user input data to test the functions-->
+var stateUserInput = "washington";
+var cityUserInput = "seattle";
+var zipcodeUserInput = "98022";
+
+//these variables allow us to change the url input into our fetch commands to filter based on which criteria user inputted
+var stateRequestUrl =
+  "https://api.openbrewerydb.org/v1/breweries?by_state=" + stateUserInput;
+console.log("staterequesturl", stateRequestUrl);
+var cityRequestUrl =
+  "https://api.openbrewerydb.org/v1/breweries?by_city=" + cityUserInput;
+console.log("cityrequesturl", cityRequestUrl);
+var zipcodeRequestUrl =
+  "https://api.openbrewerydb.org/v1/breweries?by_postal=" + zipcodeUserInput;
+console.log("zipcoderequesturl", zipcodeRequestUrl);
+
+// function that takes user input and fetches data based on state search criteria
+function fetchStateData() {
+  fetch(stateRequestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      for (let index = 0; index < data.length; index++) {
+        console.log(data[index].name);
+        console.log(data[index].state);
+        console.log(data[index].address_1);
+        console.log(data[index].phone);
+        console.log(data[index].city);
+        console.log(data[index].brewery_type);
+        console.log(data[index].website_url);
+      }
+    });
+}
+// function that takes user input and fetches data based on city search criteria
+function fetchCityData() {
+  fetch(cityRequestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      for (let index = 0; index < data.length; index++) {
+        console.log(data[index].name);
+        console.log(data[index].state);
+        console.log(data[index].address_1);
+        console.log(data[index].phone);
+        console.log(data[index].city);
+        console.log(data[index].brewery_type);
+        console.log(data[index].website_url);
+      }
+    });
+}
+// function that takes user input and fetches data based on zipcode search criteria
+function fetchZipCodeData() {
+  fetch(zipcodeRequestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      for (let index = 0; index < data.length; index++) {
+        console.log(data[index].name);
+        console.log(data[index].state);
+        console.log(data[index].address_1);
+        console.log(data[index].phone);
+        console.log(data[index].city);
+        console.log(data[index].brewery_type);
+        console.log(data[index].website_url);
+      }
+    });
+}
+//define variables for each element being modified
+//
+//
+//
+
+//      change spaces from user input with replace function to add underscores---.replace(/ /g, "_")
 //      for loop/if else(?): needs to alter fetch url for the input given i.e "which state, city or zip code"
 //
 //
