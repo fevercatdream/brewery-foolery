@@ -37,20 +37,20 @@
           <input id="play-btn" class="button" type="submit" value="Play"></input>
         </form>
         <section id="content-container-trivia-q">
-          <div id="trivia-question">
-            <p>Which of these quotes is from the film "The Shining"?</p>
-            <p>
-              Options:</p>
+          <div id="trivia-question-container">
+            <h3>Question:</h3>
+            <p id="trivia-question"></p>
           </div>
+          <h3>Options:</h3>
           <div id="trivia-possible-answers">
-            <p>Nobody puts baby in a corner.</p>
-            <p>Here's Johnny!</p>
-            <p>Yo, Adrian!</p>
-            <p>Rosebud.</p>
+            <p id="opt-ans-a"></p>
+            <p id="opt-ans-b"></p>
+            <p id="opt-ans-c"></p>
+            <p id="opt-ans-d"></p>
           </div>
-          <div id="correct-answer" class="hidden">
+          <div id="correct-answer-container" class="hidden">
             <h3>Correct Answer:</h3>
-            <p>Here's Johnny!</p>
+            <p id="correct-answer"></p>
           </div>
           <input id="correct-answer-btn" class="button" type="submit" value="Correct Answer"></input>
           <input id="next-question-btn" class="button" type="submit" value="Next Question"></input>
