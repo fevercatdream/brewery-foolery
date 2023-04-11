@@ -44,23 +44,71 @@ console.log("cityrequesturl", cityRequestUrl);
 var zipcodeRequestUrl =
   "https://api.openbrewerydb.org/v1/breweries?by_postal=" + zipcodeUserInput;
 console.log("zipcoderequesturl", zipcodeRequestUrl);
-
 // function that takes user input and fetches data based on state search criteria
+
+var searchContainer = document.getElementById(
+  "content-container-search-results"
+);
 function fetchStateData() {
   fetch(stateRequestUrl)
     .then(function (response) {
+      console.log(response);
       return response.json();
     })
     .then(function (data) {
       console.log(data);
       for (let index = 0; index < data.length; index++) {
-        console.log(data[index].name);
-        console.log(data[index].state);
-        console.log(data[index].address_1);
-        console.log(data[index].phone);
-        console.log(data[index].city);
-        console.log(data[index].brewery_type);
-        console.log(data[index].website_url);
+        // console.log(data[index].name);
+        // console.log(data[index].state);
+        // console.log(data[index].address_1);
+        // console.log(data[index].phone);
+        // console.log(data[index].city);
+        // console.log(data[index].brewery_type);
+        // console.log(data[index].website_url);
+
+        var breweryCard = document.createElement("div");
+        breweryCard.classList.add("card");
+        breweryCard.setAttribute("id", "content-container");
+        searchContainer.appendChild(breweryCard);
+
+        var breweryCardHeader = document.createElement("header");
+        breweryCardHeader.classList.add("card-header");
+        breweryCard.appendChild(breweryCardHeader);
+
+        var brewName = document.createElement("p");
+        brewName.classList.add("card-header-title");
+        brewName.innerHTML = data[index].name;
+        breweryCardHeader.appendChild(brewName);
+
+        var modalButton = document.createElement("button");
+        modalButton.classList.add("card-header-icon");
+        breweryCardHeader.appendChild(modalButton);
+
+        var CardContentDiv = document.createElement("div");
+        CardContentDiv.classList.add("content");
+        breweryCard.setAttribute("id", "search-container-id");
+        breweryCard.appendChild(CardContentDiv);
+
+        var CardContentStreet = document.createElement("p");
+        CardContentStreet.classList.add("content");
+        CardContentStreet.innerHTML = data[index].address_1;
+        breweryCard.appendChild(CardContentStreet);
+
+        var CardContentCity = document.createElement("p");
+        CardContentCity.classList.add("content");
+        CardContentCity.innerHTML = data[index].city;
+        breweryCard.appendChild(CardContentCity);
+
+        var CardContentZipcode = document.createElement("p");
+        CardContentZipcode.classList.add("content");
+        CardContentZipcode.innerHTML = data[index].postal_code;
+        breweryCard.appendChild(CardContentZipcode);
+
+        var CardContentState = document.createElement("p");
+        CardContentState.classList.add("content");
+        CardContentState.innerHTML = data[index].state;
+        breweryCard.appendChild(CardContentState);
+
         //have correct properties located and selected, just need to get them out of function, or create/append from within this function
       }
     });
@@ -81,6 +129,50 @@ function fetchCityData() {
         console.log(data[index].city);
         console.log(data[index].brewery_type);
         console.log(data[index].website_url);
+
+        var breweryCard = document.createElement("div");
+        breweryCard.classList.add("card");
+        breweryCard.setAttribute("id", "content-container");
+        searchContainer.appendChild(breweryCard);
+
+        var breweryCardHeader = document.createElement("header");
+        breweryCardHeader.classList.add("card-header");
+        breweryCard.appendChild(breweryCardHeader);
+
+        var brewName = document.createElement("p");
+        brewName.classList.add("card-header-title");
+        brewName.innerHTML = data[index].name;
+        breweryCardHeader.appendChild(brewName);
+
+        var modalButton = document.createElement("button");
+        modalButton.classList.add("card-header-icon");
+        breweryCardHeader.appendChild(modalButton);
+
+        var CardContentDiv = document.createElement("div");
+        CardContentDiv.classList.add("content");
+        breweryCard.setAttribute("id", "search-container-id");
+        breweryCard.appendChild(CardContentDiv);
+
+        var CardContentStreet = document.createElement("p");
+        CardContentStreet.classList.add("content");
+        CardContentStreet.innerHTML = data[index].address_1;
+        breweryCard.appendChild(CardContentStreet);
+
+        var CardContentCity = document.createElement("p");
+        CardContentCity.classList.add("content");
+        CardContentCity.innerHTML = data[index].city;
+        breweryCard.appendChild(CardContentCity);
+
+        var CardContentZipcode = document.createElement("p");
+        CardContentZipcode.classList.add("content");
+        CardContentZipcode.innerHTML = data[index].postal_code;
+        breweryCard.appendChild(CardContentZipcode);
+
+        var CardContentState = document.createElement("p");
+        CardContentState.classList.add("content");
+        CardContentState.innerHTML = data[index].state;
+        breweryCard.appendChild(CardContentState);
+
         //have correct properties located and selected, just need to get them out of function, or create/append from within this function
       }
     });
@@ -102,6 +194,50 @@ function fetchZipCodeData() {
         console.log(data[index].city);
         console.log(data[index].brewery_type);
         console.log(data[index].website_url);
+
+        var breweryCard = document.createElement("div");
+        breweryCard.classList.add("card");
+        breweryCard.setAttribute("id", "content-container");
+        searchContainer.appendChild(breweryCard);
+
+        var breweryCardHeader = document.createElement("header");
+        breweryCardHeader.classList.add("card-header");
+        breweryCard.appendChild(breweryCardHeader);
+
+        var brewName = document.createElement("p");
+        brewName.classList.add("card-header-title");
+        brewName.innerHTML = data[index].name;
+        breweryCardHeader.appendChild(brewName);
+
+        var modalButton = document.createElement("button");
+        modalButton.classList.add("card-header-icon");
+        breweryCardHeader.appendChild(modalButton);
+
+        var CardContentDiv = document.createElement("div");
+        CardContentDiv.classList.add("content");
+        breweryCard.setAttribute("id", "search-container-id");
+        breweryCard.appendChild(CardContentDiv);
+
+        var CardContentStreet = document.createElement("p");
+        CardContentStreet.classList.add("content");
+        CardContentStreet.innerHTML = data[index].address_1;
+        breweryCard.appendChild(CardContentStreet);
+
+        var CardContentCity = document.createElement("p");
+        CardContentCity.classList.add("content");
+        CardContentCity.innerHTML = data[index].city;
+        breweryCard.appendChild(CardContentCity);
+
+        var CardContentZipcode = document.createElement("p");
+        CardContentZipcode.classList.add("content");
+        CardContentZipcode.innerHTML = data[index].postal_code;
+        breweryCard.appendChild(CardContentZipcode);
+
+        var CardContentState = document.createElement("p");
+        CardContentState.classList.add("content");
+        CardContentState.innerHTML = data[index].state;
+        breweryCard.appendChild(CardContentState);
+
         //have correct properties located and selected, just need to get them out of function, or create/append from within this function
       }
     });
@@ -140,6 +276,7 @@ function fetchTriviaData() {
         console.log(questionProperty);
         console.log(correctAnswerProperty);
         console.log(incorrectAnswerProperty);
+
         //have correct properties located and selected, just need to get them out of function, or create/append from within this function
       }
     });
