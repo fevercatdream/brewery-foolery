@@ -99,6 +99,7 @@ showCorrectAnswerBtn.addEventListener("click", function () {
 });
 nextQuestionBtn.addEventListener("click", function (event) {
   event.preventDefault();
+  correctAnswerContainer.classList.add("hidden");
   console.log("next question button is working!");
   fetchTriviaData();
   //need to get data out of fetch requests to complete this function
@@ -106,6 +107,7 @@ nextQuestionBtn.addEventListener("click", function (event) {
 });
 playTriviaBtn.addEventListener("click", function (event) {
   event.preventDefault();
+  correctAnswerContainer.classList.add("hidden");
   fetchTriviaData();
   console.log("play button is working!");
   //need to get data out of fetch requests to complete this function
