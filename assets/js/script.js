@@ -3,6 +3,7 @@ var dropdownChoiceCityStateZipcode = document.querySelector("#dropdown-choice");
 var searchBarInput = document.querySelector("#search-bar");
 var searchButton = document.querySelector("#search-button");
 var contentContainerSearchResults = document.querySelector("#content-container-search-results");
+var contentContainerNoSearchResults = document.querySelector("#content-container-no-results");
 
 // get all elements with class = card
 var cardEls = document.querySelectorAll(".card");
@@ -94,6 +95,7 @@ function closeModal() {
   modalEl.classList.remove("is-active");
 }
 
+// function to fetch brewery data
 function fetchSearchResults(){
 
   // search type is state || city || postal
