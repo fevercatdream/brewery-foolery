@@ -64,7 +64,9 @@ function fetchTriviaData() {
 
   fetch(triviaRequestUrl)
     .then(function (response) {
-      return response.json();
+      if (response.status >= 200 && response.status < 300) {
+        return response.json();
+      }
     })
     .then(function (data) {
       console.log(data);
@@ -95,13 +97,16 @@ showCorrectAnswerBtn.addEventListener("click", function () {
   //need to get data out of fetch requests to complete this function
   //add render function for that data here as well
 });
-nextQuestionBtn.addEventListener("click", function () {
+nextQuestionBtn.addEventListener("click", function (event) {
+  event.preventDefault();
   console.log("next question button is working!");
+  fetchTriviaData();
   //need to get data out of fetch requests to complete this function
   //add render function for that data here as well
 });
 playTriviaBtn.addEventListener("click", function (event) {
   event.preventDefault();
+  fetchTriviaData();
   console.log("play button is working!");
   //need to get data out of fetch requests to complete this function
   //add render function for that data here as well
