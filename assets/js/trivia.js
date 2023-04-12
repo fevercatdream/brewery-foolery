@@ -1,13 +1,17 @@
 // bar trivia page
 var playBtn = document.querySelector("#play-btn");
-var triviaQuestionContainer = document.querySelector("#trivia-question-container");
+var triviaQuestionContainer = document.querySelector(
+  "#trivia-question-container"
+);
 var triviaQuestion = document.querySelector("#trivia-question");
 var triviaPossibleAnswers = document.querySelector("#trivia-possible-answers");
 var optAnsA = document.querySelector("#opt-ans-a");
 var optAnsB = document.querySelector("#opt-ans-b");
 var optAnsC = document.querySelector("#opt-ans-c");
 var optAnsD = document.querySelector("#opt-ans-d");
-var correctAnswerContainer = document.querySelector("#correct-answer-container");
+var correctAnswerContainer = document.querySelector(
+  "#correct-answer-container"
+);
 var correctAnswer = document.querySelector("#correct-answer");
 var correctAnswerBtn = document.querySelector("#correct-answer-btn");
 var nextQuestionBtn = document.querySelector("#next-question-btn");
@@ -31,6 +35,31 @@ var triviaRequestUrl =
   userInputLowercase;
 console.log(triviaRequestUrl);
 
+//this function shuffles the answer array index so we get randomzed order of answers
+function shuffleAnswers(fullAnswerArray) {
+  let currentIndex = fullAnswerArray.length,
+    randomIndex;
+  console.log(currentIndex);
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    //shuffles current array
+    [fullAnswerArray[currentIndex], fullAnswerArray[randomIndex]] = [
+      fullAnswerArray[randomIndex],
+      fullAnswerArray[currentIndex],
+    ];
+    //renders the questions to page based on index we shuffled
+    optAnsA.innerHTML = fullAnswerArray[3];
+    console.log("after-shuffle-1", fullAnswerArray[3]);
+    optAnsB.innerHTML = fullAnswerArray[1];
+    console.log("after-shuffle-2", fullAnswerArray[1]);
+    optAnsC.innerHTML = fullAnswerArray[2];
+    console.log("after-shuffle-3", fullAnswerArray[2]);
+    optAnsD.innerHTML = fullAnswerArray[0];
+    console.log("after-shuffle-4", fullAnswerArray[0]);
+  }
+}
+
 function fetchTriviaData() {
   fetch(triviaRequestUrl)
     .then(function (response) {
@@ -39,14 +68,15 @@ function fetchTriviaData() {
     .then(function (data) {
       console.log(data);
       for (let index = 0; index < data.length; index++) {
-        var correctAnswerProperty = data[index].correctAnswer;
+        var correctAnswerProperty = [data[index].correctAnswer];
         var incorrectAnswerProperty = data[index].incorrectAnswers;
         var questionProperty = data[index].question;
-        console.log(questionProperty);
-        console.log(correctAnswerProperty);
-        console.log(incorrectAnswerProperty);
-        //have correct properties located and selected, just need to get them out of function, or create/append from within this function
+        var fullAnswerArray = incorrectAnswerProperty.concat(
+          correctAnswerProperty
+        );
       }
+      triviaQuestion.innerHTML = questionProperty;
+      shuffleAnswers(fullAnswerArray);
     });
 }
 
