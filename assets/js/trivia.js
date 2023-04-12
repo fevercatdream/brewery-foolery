@@ -3,6 +3,8 @@ var playBtn = document.querySelector("#play-btn");
 var triviaQuestionContainer = document.querySelector(
   "#trivia-question-container"
 );
+var triviaDropdownChoice = document.querySelector("#trivia-dropdown-choice");
+
 var triviaQuestion = document.querySelector("#trivia-question");
 var triviaPossibleAnswers = document.querySelector("#trivia-possible-answers");
 var optAnsA = document.querySelector("#opt-ans-a");
@@ -26,14 +28,6 @@ var nextQuestionBtn = document.querySelector("#next-question-btn");
 //fetch correct answer in it's own variable
 
 //these variables are sample variables to test functions
-triviaUserInput = "arts&literature";
-var userInputLowercase = triviaUserInput.toLocaleLowerCase();
-console.log(userInputLowercase);
-
-var triviaRequestUrl =
-  "https://the-trivia-api.com/api/questions?limit=20&categories=" +
-  userInputLowercase;
-console.log(triviaRequestUrl);
 
 //this function shuffles the answer array index so we get randomzed order of answers
 function shuffleAnswers(fullAnswerArray) {
@@ -61,6 +55,13 @@ function shuffleAnswers(fullAnswerArray) {
 }
 
 function fetchTriviaData() {
+  var triviaUserInput = triviaDropdownChoice.value;
+
+  var triviaRequestUrl =
+    "https://the-trivia-api.com/api/questions?limit=20&categories=" +
+    triviaUserInput;
+  console.log(triviaRequestUrl);
+
   fetch(triviaRequestUrl)
     .then(function (response) {
       if (response.status >= 200 && response.status < 300) {
