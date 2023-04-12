@@ -7,9 +7,31 @@
     <link rel="stylesheet" href="../css/reset.css" />
     <link rel="stylesheet" href="../css/bulma.min.css" />
     <link rel="stylesheet" href="../css/style.css" />
+    <style>
+    #map {
+      width: 100%;
+      height: 400px;
+      background-color: grey;
+    }
+   </style>
     <title>Brewery Foolery</title>
 </head>
 <body>
+  <div id="map">
+  <script async defer
+       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIQLae75fbUV6bap_TwAZ6zw32VLNYa28&callback=initMap">
+       </script>
+       <script>
+        function initMap() {
+            var dumbo = {lat: 40.700802, lng:73.987602};
+            var mapOptions = {
+                center: dumbo,
+                zoom: 10
+            };
+            var googlemap = new google.maps.Map(document.getElementById("map"), mapOptions);
+        }
+    </script>
+   </div>
     <header id="header">
         <h1>Brewery Foolery</h1>
         <nav>
@@ -229,7 +251,7 @@
 
                 </footer>
             </div>
-        </section>
+          </section>
 
         <nav id="pagination-id" class="pagination is-centered" role="navigation" aria-label="pagination">
             <a id="pagination-previous-id" class="pagination-previous">Previous</a>
@@ -262,6 +284,7 @@
         <section id="modal-body-id" class="modal-card-body">
           <!-- Content ... -->
           <img src="https://placebeer.com/200/200" alt="image of beer" />
+          
           <br />
           <p>Type of brewery: Micro-brewery</p>
           <p>Website: <a href="https://placebeer.com/">https://placebeer.com/</a></p>
@@ -269,9 +292,12 @@
           <p>Phone number: <a href="tel:2065432310">206-543-2310</a></p>
           <br />
           <div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689.891926897823!2d-122.33817148527251!3d47.60879107918479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54906ab3929838e7%3A0x2bee5b467264f7bf!2s1325%204th%20Ave%2C%20Seattle%2C%20WA%2098101!5e0!3m2!1sen!2sus!4v1681166877247!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </section>
+        <div>
+          
+           
+        </div>
         <footer id="modal-foot-id" class="modal-card-foot">
           <button id="prevbutt" class="button is-success previous">Previous</button>
           <button class="button next">Next</button>
