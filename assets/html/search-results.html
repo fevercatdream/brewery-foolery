@@ -23,7 +23,7 @@
             <select id="dropdown-choice">
               <option value="city">City</option>
               <option value="state">State</option>
-              <option value="zipcode">Zipcode</option>
+              <option value="postal">Zipcode</option>
             </select>
           </div>
           <input id="search-bar" type="text" placeholder="Search.." name="search">
@@ -34,7 +34,8 @@
 
         </main>
 
-        <nav id="pagination-id" class="pagination is-centered" role="navigation" aria-label="pagination">
+        <!-- pagination might not be possible -->
+        <!-- <nav id="pagination-id" class="pagination is-centered" role="navigation" aria-label="pagination">
             <a id="pagination-previous-id" class="pagination-previous">Previous</a>
             <a id="pagination-next-id" class="pagination-next">Next page</a>
             <ul class="pagination-list">
@@ -46,6 +47,10 @@
               <li><span class="pagination-ellipsis">&hellip;</span></li>
               <li><a class="pagination-link" aria-label="Goto page 86">86</a></li>
             </ul>
+        </nav> -->
+        <nav>
+          <a id="pagination-previous-id" class="pagination-previous">Previous</a>
+          <a id="pagination-next-id" class="pagination-next">Next page</a>
         </nav>
 
     <footer id="footer">
