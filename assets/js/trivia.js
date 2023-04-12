@@ -77,6 +77,7 @@ function fetchTriviaData() {
       }
       triviaQuestion.innerHTML = questionProperty;
       shuffleAnswers(fullAnswerArray);
+      correctAnswer.innerHTML = correctAnswerProperty;
     });
 }
 
@@ -89,6 +90,7 @@ var playTriviaBtn = document.querySelector("#play-btn");
 
 showCorrectAnswerBtn.addEventListener("click", function () {
   console.log("correct answer button is working!");
+  correctAnswerContainer.classList.remove("hidden");
   //need to get data out of fetch requests to complete this function
   //add render function for that data here as well
 });
