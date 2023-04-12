@@ -7,31 +7,9 @@
     <link rel="stylesheet" href="../css/reset.css" />
     <link rel="stylesheet" href="../css/bulma.min.css" />
     <link rel="stylesheet" href="../css/style.css" />
-    <style>
-    #map {
-      width: 100%;
-      height: 400px;
-      background-color: grey;
-    }
-   </style>
     <title>Brewery Foolery</title>
 </head>
 <body>
-  <div id="map">
-  <script async defer
-       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIQLae75fbUV6bap_TwAZ6zw32VLNYa28&callback=initMap">
-       </script>
-       <script>
-        function initMap() {
-            var dumbo = {lat: 40.700802, lng:73.987602};
-            var mapOptions = {
-                center: dumbo,
-                zoom: 10
-            };
-            var googlemap = new google.maps.Map(document.getElementById("map"), mapOptions);
-        }
-    </script>
-   </div>
     <header id="header">
         <h1>Brewery Foolery</h1>
         <nav>
@@ -251,7 +229,7 @@
 
                 </footer>
             </div>
-          </section>
+
 
         <nav id="pagination-id" class="pagination is-centered" role="navigation" aria-label="pagination">
             <a id="pagination-previous-id" class="pagination-previous">Previous</a>
