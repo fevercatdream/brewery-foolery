@@ -1,5 +1,8 @@
-// search container
+// search
+var dropdownChoiceCityStateZipcode = document.querySelector("#dropdown-choice");
+var searchBarInput = document.querySelector("#search-bar");
 var searchButton = document.querySelector("#search-button");
+var contentContainerSearchResults = document.querySelector("#content-container-search-results");
 
 // get all elements with class = card
 var cardEls = document.querySelectorAll(".card");
@@ -63,9 +66,7 @@ var modalEl = document.querySelector(".modal");
 var modalTitleId = document.querySelector("#modal-title-id");
 var modalCloseBtn = document.querySelector("#modal-close");
 var modalTypeOfBrewery = document.querySelector("#modal-type-of-brewery");
-var modalBreweryWebsiteLink = document.querySelector(
-  "#modal-brewery-website-link"
-);
+var modalBreweryWebsiteLink = document.querySelector("#modal-brewery-website-link");
 var modalBreweryAddress = document.querySelector("#modal-brewery-address");
 var modalPhoneNumber = document.querySelector("#modal-phone-number");
 var modalMap = document.querySelector("#modal-map");
@@ -73,271 +74,121 @@ var modalFootId = document.querySelector("#modal-foot-id");
 var modalPrevBtn = document.querySelector("#modal-prev-btn");
 var modalNextBtn = document.querySelector("#modal-next-btn");
 
+// Previous and Next Page buttons on search
+var navPreviousPageBtn = document.querySelector("#pagination-previous-id");
+var navNextPageBtn = document.querySelector("#pagination-next-id");
+
+// open modal
 for (var i = 0; i < cardEls.length; i++) {
   var cardEl = cardEls[i];
   cardEl.addEventListener("click", openModal);
 }
-
+// close modal
 modalCloseBtn.addEventListener("click", closeModal);
-
+// add class is-active to show modal
 function openModal() {
   modalEl.classList.add("is-active");
 }
-
+// remove class is-active to hide modal
 function closeModal() {
   modalEl.classList.remove("is-active");
 }
 
-//
-//function?(start ith just getting the fetch command and changing it for each criteria) for querying brewery API
-// ----
-//needs to fetch from 3 different criteria (for loop?)
-//fetch function for state
-//fetch function for city
-//fetch function for zip code
+function fetchSearchResults(){
 
-//these variables are sample user input data to test the functions-->
-var stateUserInput = "washington";
-var stateUserInputReplaceSpaces = stateUserInput.replace(/ /g, "_").trim();
-var cityUserInput = "seattle";
-var cityUserInputReplaceSpaces = cityUserInput.replace(/ /g, "_").trim();
-var zipcodeUserInput = "98022";
+  // search type is state || city || postal
+  var searchType = dropdownChoiceCityStateZipcode.value;
+  // user search input is the input state, city, or zipcode - example: WA || Seattle || 98101
+  var userSearchInput = searchBarInput.value;
+  // current search page
+  var currentSearchPage = 1;
+  // how many search results to show per page
+  var searchResultsPerPage = 9;
 
-function getOption() {
-  userSearchSelection = document.querySelector("#dropdown-choice");
-  output = userSearchSelection.value;
-  console.log(output);
-  return output;
-}
+  // the created url
+  var searchRequestUrl = `https://api.openbrewerydb.org/v1/breweries?by_${searchType}=${userSearchInput}&page=${currentSearchPage}&per_page=${searchResultsPerPage}`
+  console.log("URL: ", searchRequestUrl);
 
-//these variables allow us to change the url input into our fetch commands to filter based on which criteria user inputted
-var stateRequestUrl =
-  "https://api.openbrewerydb.org/v1/breweries?by_state=" +
-  stateUserInputReplaceSpaces;
-console.log("staterequesturl", stateRequestUrl);
-var cityRequestUrl =
-  "https://api.openbrewerydb.org/v1/breweries?by_city=" +
-  cityUserInputReplaceSpaces;
-console.log("cityrequesturl", cityRequestUrl);
-var zipcodeRequestUrl =
-  "https://api.openbrewerydb.org/v1/breweries?by_postal=" + zipcodeUserInput;
-console.log("zipcoderequesturl", zipcodeRequestUrl);
-// function that takes user input and fetches data based on state search criteria
+  // data fetch request
+  fetch(searchRequestUrl)
+    .then(function(response){
+      if(response.status >= 200 && response.status < 300){
+        response.json().then(function(data){
+          console.log("data", data);
 
-var searchContainer = document.getElementById(
-  "content-container-search-results"
-);
-function fetchStateData() {
-  fetch(stateRequestUrl)
-    .then(function (response) {
-      console.log(response);
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-      for (let index = 0; index < data.length; index++) {
-        // console.log(data[index].name);
-        // console.log(data[index].state);
-        // console.log(data[index].address_1);
-        // console.log(data[index].phone);
-        // console.log(data[index].city);
-        // console.log(data[index].brewery_type);
-        // console.log(data[index].website_url);
-
-        var breweryCard = document.createElement("div");
-        breweryCard.classList.add("card");
-        breweryCard.setAttribute("id", "content-container");
-        searchContainer.appendChild(breweryCard);
-
-        var breweryCardHeader = document.createElement("header");
-        breweryCardHeader.classList.add("card-header");
-        breweryCard.appendChild(breweryCardHeader);
-
-        var brewName = document.createElement("p");
-        brewName.classList.add("card-header-title");
-        brewName.innerHTML = data[index].name;
-        breweryCardHeader.appendChild(brewName);
-
-        var modalButton = document.createElement("button");
-        modalButton.classList.add("card-header-icon");
-        breweryCardHeader.appendChild(modalButton);
-
-        var CardContentDiv = document.createElement("div");
-        CardContentDiv.classList.add("content");
-        breweryCard.setAttribute("id", "search-container-id");
-        breweryCard.appendChild(CardContentDiv);
-
-        var CardContentStreet = document.createElement("p");
-        CardContentStreet.classList.add("content");
-        CardContentStreet.innerHTML = data[index].address_1;
-        breweryCard.appendChild(CardContentStreet);
-
-        var CardContentCity = document.createElement("p");
-        CardContentCity.classList.add("content");
-        CardContentCity.innerHTML = data[index].city;
-        breweryCard.appendChild(CardContentCity);
-
-        var CardContentZipcode = document.createElement("p");
-        CardContentZipcode.classList.add("content");
-        CardContentZipcode.innerHTML = data[index].postal_code;
-        breweryCard.appendChild(CardContentZipcode);
-
-        var CardContentState = document.createElement("p");
-        CardContentState.classList.add("content");
-        CardContentState.innerHTML = data[index].state;
-        breweryCard.appendChild(CardContentState);
-
-        //have correct properties located and selected, just need to get them out of function, or create/append from within this function
+          for (let i = 0; i < data.length; i++) {
+            console.log(data[i].name);
+            console.log(data[i].state);
+            console.log(data[i].address_1);
+            console.log(data[i].phone);
+            console.log(data[i].city);
+            console.log(data[i].brewery_type);
+            console.log(data[i].website_url);
+            
+            var breweryCard = document.createElement("div");
+            breweryCard.classList.add("card");
+            breweryCard.setAttribute("id", "content-container");
+            contentContainerSearchResults.appendChild(breweryCard);
+            
+            var breweryCardHeader = document.createElement("header");
+            breweryCardHeader.classList.add("card-header");
+            breweryCard.appendChild(breweryCardHeader);
+            
+            var brewName = document.createElement("p");
+            brewName.classList.add("card-header-title");
+            brewName.innerHTML = data[i].name;
+            breweryCardHeader.appendChild(brewName);
+            
+            var modalButton = document.createElement("button");
+            modalButton.classList.add("card-header-icon");
+            breweryCardHeader.appendChild(modalButton);
+            
+            var CardContentDiv = document.createElement("div");
+            CardContentDiv.classList.add("content");
+            breweryCard.setAttribute("id", "search-container-id");
+            breweryCard.appendChild(CardContentDiv);
+            
+            var CardContentStreet = document.createElement("p");
+            CardContentStreet.classList.add("content");
+            CardContentStreet.innerHTML = data[i].address_1;
+            breweryCard.appendChild(CardContentStreet);
+            
+            var CardContentCity = document.createElement("p");
+            CardContentCity.classList.add("content");
+            CardContentCity.innerHTML = data[i].city;
+            breweryCard.appendChild(CardContentCity);
+            
+            var CardContentZipcode = document.createElement("p");
+            CardContentZipcode.classList.add("content");
+            CardContentZipcode.innerHTML = data[i].postal_code;
+            breweryCard.appendChild(CardContentZipcode);
+            
+            var CardContentState = document.createElement("p");
+            CardContentState.classList.add("content");
+            CardContentState.innerHTML = data[i].state;
+            breweryCard.appendChild(CardContentState);
+          }
+        })
       }
-    });
-}
-// function that takes user input and fetches data based on city search criteria
-function fetchCityData() {
-  fetch(cityRequestUrl)
-    .then(function (response) {
-      return response.json();
     })
-    .then(function (data) {
-      console.log(data);
-      for (let index = 0; index < data.length; index++) {
-        console.log(data[index].name);
-        console.log(data[index].state);
-        console.log(data[index].address_1);
-        console.log(data[index].phone);
-        console.log(data[index].city);
-        console.log(data[index].brewery_type);
-        console.log(data[index].website_url);
-
-        var breweryCard = document.createElement("div");
-        breweryCard.classList.add("card");
-        breweryCard.setAttribute("id", "content-container");
-        searchContainer.appendChild(breweryCard);
-
-        var breweryCardHeader = document.createElement("header");
-        breweryCardHeader.classList.add("card-header");
-        breweryCard.appendChild(breweryCardHeader);
-
-        var brewName = document.createElement("p");
-        brewName.classList.add("card-header-title");
-        brewName.innerHTML = data[index].name;
-        breweryCardHeader.appendChild(brewName);
-
-        var modalButton = document.createElement("button");
-        modalButton.classList.add("card-header-icon");
-        breweryCardHeader.appendChild(modalButton);
-
-        var CardContentDiv = document.createElement("div");
-        CardContentDiv.classList.add("content");
-        breweryCard.setAttribute("id", "search-container-id");
-        breweryCard.appendChild(CardContentDiv);
-
-        var CardContentStreet = document.createElement("p");
-        CardContentStreet.classList.add("content");
-        CardContentStreet.innerHTML = data[index].address_1;
-        breweryCard.appendChild(CardContentStreet);
-
-        var CardContentCity = document.createElement("p");
-        CardContentCity.classList.add("content");
-        CardContentCity.innerHTML = data[index].city;
-        breweryCard.appendChild(CardContentCity);
-
-        var CardContentZipcode = document.createElement("p");
-        CardContentZipcode.classList.add("content");
-        CardContentZipcode.innerHTML = data[index].postal_code;
-        breweryCard.appendChild(CardContentZipcode);
-
-        var CardContentState = document.createElement("p");
-        CardContentState.classList.add("content");
-        CardContentState.innerHTML = data[index].state;
-        breweryCard.appendChild(CardContentState);
-
-        //have correct properties located and selected, just need to get them out of function, or create/append from within this function
-      }
-    });
-}
-
-// function that takes user input and fetches data based on zipcode search criteria
-function fetchZipCodeData() {
-  fetch(zipcodeRequestUrl)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-      for (let index = 0; index < data.length; index++) {
-        console.log(data[index].name);
-        console.log(data[index].state);
-        console.log(data[index].address_1);
-        console.log(data[index].phone);
-        console.log(data[index].city);
-        console.log(data[index].brewery_type);
-        console.log(data[index].website_url);
-
-        var breweryCard = document.createElement("div");
-        breweryCard.classList.add("card");
-        breweryCard.setAttribute("id", "content-container");
-        searchContainer.appendChild(breweryCard);
-
-        var breweryCardHeader = document.createElement("header");
-        breweryCardHeader.classList.add("card-header");
-        breweryCard.appendChild(breweryCardHeader);
-
-        var brewName = document.createElement("p");
-        brewName.classList.add("card-header-title");
-        brewName.innerHTML = data[index].name;
-        breweryCardHeader.appendChild(brewName);
-
-        var modalButton = document.createElement("button");
-        modalButton.classList.add("card-header-icon");
-        breweryCardHeader.appendChild(modalButton);
-
-        var CardContentDiv = document.createElement("div");
-        CardContentDiv.classList.add("content");
-        breweryCard.setAttribute("id", "search-container-id");
-        breweryCard.appendChild(CardContentDiv);
-
-        var CardContentStreet = document.createElement("p");
-        CardContentStreet.classList.add("content");
-        CardContentStreet.innerHTML = data[index].address_1;
-        breweryCard.appendChild(CardContentStreet);
-
-        var CardContentCity = document.createElement("p");
-        CardContentCity.classList.add("content");
-        CardContentCity.innerHTML = data[index].city;
-        breweryCard.appendChild(CardContentCity);
-
-        var CardContentZipcode = document.createElement("p");
-        CardContentZipcode.classList.add("content");
-        CardContentZipcode.innerHTML = data[index].postal_code;
-        breweryCard.appendChild(CardContentZipcode);
-
-        var CardContentState = document.createElement("p");
-        CardContentState.classList.add("content");
-        CardContentState.innerHTML = data[index].state;
-        breweryCard.appendChild(CardContentState);
-
-        //have correct properties located and selected, just need to get them out of function, or create/append from within this function
-      }
-    });
 }
 
 // ------------------event listeners--------------------
-//commented out cause they throw errors without ID's being on same page
+searchButton.addEventListener("click", function (event) {
+  event.preventDefault();
+  fetchSearchResults();
+});
 
-var brewSearchBtn = document.querySelector("#search-button");
+navNextPageBtn.addEventListener("click", function(event){
+  event.preventDefault();
+  currentSearchPage++;
+  fetchSearchResults();
+});
 
-brewSearchBtn.addEventListener("click", function () {
-  //   var brewSearchValue = document.getElementById("search-bar").value;
-  //   console.log(brewSearchValue);
-  var dropdownMenuOutput = getOption();
-  console.log(output);
-  if (dropdownMenuOutput === "state") {
-    fetchStateData();
-  } else if (dropdownMenuOutput === "city") {
-    fetchCityData();
-  } else {
-    fetchZipCodeData();
-  }
+navPreviousPageBtn.addEventListener("click", function(event){
+  event.preventDefault();
+  currentSearchPage--;
+  fetchSearchResults();
 });
 
 //-------tasks still needed to be completed------------:
