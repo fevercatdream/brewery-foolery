@@ -4,6 +4,10 @@ var searchBarInput = document.querySelector("#search-bar");
 var searchButton = document.querySelector("#search-button");
 var contentContainerSearchResults = document.querySelector("#content-container-search-results");
 var contentContainerNoSearchResults = document.querySelector("#content-container-no-results");
+  // current search page
+  var currentSearchPage = 1;
+  // how many search results to show per page
+  var searchResultsPerPage = 9;
 
 // get all elements with class = card
 var cardEls = document.querySelectorAll(".card");
@@ -102,10 +106,6 @@ function fetchSearchResults(){
   var searchType = dropdownChoiceCityStateZipcode.value;
   // user search input is the input state, city, or zipcode - example: WA || Seattle || 98101
   var userSearchInput = searchBarInput.value;
-  // current search page
-  var currentSearchPage = 1;
-  // how many search results to show per page
-  var searchResultsPerPage = 9;
 
   // the created url
   var searchRequestUrl = `https://api.openbrewerydb.org/v1/breweries?by_${searchType}=${userSearchInput}&page=${currentSearchPage}&per_page=${searchResultsPerPage}`
@@ -178,17 +178,23 @@ function fetchSearchResults(){
 // ------------------event listeners--------------------
 searchButton.addEventListener("click", function (event) {
   event.preventDefault();
+  contentContainerSearchResults.innerHTML = "";
+  contentContainerNoSearchResults.innerHTML = "";
   fetchSearchResults();
 });
 
 navNextPageBtn.addEventListener("click", function(event){
   event.preventDefault();
+  contentContainerSearchResults.innerHTML = "";
+  contentContainerNoSearchResults.innerHTML = "";
   currentSearchPage++;
   fetchSearchResults();
 });
 
 navPreviousPageBtn.addEventListener("click", function(event){
   event.preventDefault();
+  contentContainerSearchResults.innerHTML = "";
+  contentContainerNoSearchResults.innerHTML = "";
   currentSearchPage--;
   fetchSearchResults();
 });
