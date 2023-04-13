@@ -34,6 +34,16 @@ https://fevercatdream.github.io/project-1/
 
 <br />
 
+### Screenshot Desktop View
+![Screenshot Desktop View](./assets/images/screenshot-desktop-brew-search.png)
+
+<br />
+
+### Screenshot Mobile View
+![Screenshot Mobile View](./assets/images/screenshot-mobile-brew-search.png)
+
+<br />
+
 ## Credits
 
 Collaborators: Abi Kumagai, Thalissa Valery, and Ryan Feeney Wood
