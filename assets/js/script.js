@@ -17,15 +17,15 @@ var searchResultsPerPage = 9;
 // get all elements with class = card
 var cardEls = document.querySelectorAll(".card");
 
+var breweries;
+
 // modal
 var modalEl = document.querySelector(".modal");
 var modalTitleId = document.querySelector("#modal-title-id");
 var modalCloseBtn = document.querySelector("#modal-close");
 var modalTypeOfBrewery = document.querySelector("#modal-type-of-brewery");
-var modalBreweryWebsiteLink = document.querySelector(
-  "#modal-brewery-website-link"
-);
-websiteLinkAnchor = document.querySelector("#modal-brewery-website-link");
+var modalBreweryWebsiteLink = document.querySelector("#modal-brewery-website-link");
+var websiteLinkAnchor = document.querySelector("#modal-brewery-website-link");
 var modalBreweryAddress = document.querySelector("#modal-brewery-address");
 var modalPhoneNumber = document.querySelector("#modal-phone-number");
 var modalMap = document.querySelector("#modal-map");
@@ -36,22 +36,6 @@ var modalNextBtn = document.querySelector("#modal-next-btn");
 // Previous and Next Page buttons on search
 var navPreviousPageBtn = document.querySelector("#pagination-previous-id");
 var navNextPageBtn = document.querySelector("#pagination-next-id");
-
-// open modal
-for (var i = 0; i < cardEls.length; i++) {
-  var cardEl = cardEls[i];
-  cardEl.addEventListener("click", openModal);
-}
-// close modal
-modalCloseBtn.addEventListener("click", closeModal);
-// add class is-active to show modal
-function openModal() {
-  modalEl.classList.add("is-active");
-}
-// remove class is-active to hide modal
-function closeModal() {
-  modalEl.classList.remove("is-active");
-}
 
 // On page load the search results and no search results are hidden
 contentContainerSearchResults.classList.add("hidden");
@@ -69,7 +53,7 @@ function fetchSearchResults(){
     if (response.status >= 200 && response.status < 300) {
       response.json().then(function (data) {
         console.log("data", data);
-
+        breweries = data;
         if (data.length === 0) {
           contentContainerNoSearchResults.classList.remove("hidden");
           contentContainerSearchResults.classList.add("hidden");
@@ -78,56 +62,95 @@ function fetchSearchResults(){
           contentContainerSearchResults.classList.remove("hidden");
           for (let i = 0; i < data.length; i++) {
             console.log(data[i].name);
-            console.log(data[i].state);
-            console.log(data[i].address_1);
-            console.log(data[i].phone);
-            console.log(data[i].city);
             console.log(data[i].brewery_type);
             console.log(data[i].website_url);
-
+            console.log(data[i].address_1);
+            console.log(data[i].city);
+            console.log(data[i].state);
+            console.log(data[i].postal_code);
+            console.log(data[i].phone);
+           
             var breweryCard = document.createElement("div");
             breweryCard.classList.add("card");
-            breweryCard.setAttribute("id", "content-container");
+            breweryCard.dataset.breweryName = data[i].name;
+            breweryCard.dataset.breweryIndex = i;
+            breweryCard.addEventListener("click", modalDataRequest);
             contentContainerSearchResults.appendChild(breweryCard);
 
             var breweryCardHeader = document.createElement("header");
             breweryCardHeader.classList.add("card-header");
             breweryCard.appendChild(breweryCardHeader);
 
-            var brewName = document.createElement("p");
+            var brewName = document.createElement("h2");
             brewName.classList.add("card-header-title");
-            brewName.addEventListener("click", modalDataRequest);
             brewName.innerHTML = data[i].name;
             breweryCardHeader.appendChild(brewName);
 
-            var modalButton = document.createElement("button");
-            modalButton.classList.add("card-header-icon");
-            breweryCardHeader.appendChild(modalButton);
-
             var CardContentDiv = document.createElement("div");
             CardContentDiv.classList.add("content");
-            breweryCard.setAttribute("id", "search-container-id");
             breweryCard.appendChild(CardContentDiv);
 
-            var CardContentStreet = document.createElement("p");
-            CardContentStreet.classList.add("content");
-            CardContentStreet.innerHTML = data[i].address_1;
-            breweryCard.appendChild(CardContentStreet);
+            var CardContentAddress = document.createElement("address");
+            CardContentAddress.classList.add("content");
+            CardContentAddress.innerHTML = `${data[i].address_1} <br /> ${data[i].city} ${data[i].state} ${data[i].postal_code}`;
+            breweryCard.appendChild(CardContentAddress);
+          }
+        }
+      });
+    }
+  });
+}
 
-            var CardContentCity = document.createElement("p");
-            CardContentCity.classList.add("content");
-            CardContentCity.innerHTML = data[i].city;
-            breweryCard.appendChild(CardContentCity);
+// open modal
+for (var i = 0; i < cardEls.length; i++) {
+  var cardEl = cardEls[i];
+  cardEl.addEventListener("click", openModal);
+}
+// close modal
+modalCloseBtn.addEventListener("click", closeModal);
+// add class is-active to show modal
+function openModal() {
+  modalEl.classList.add("is-active");
+  websiteLinkAnchor.innerHTML = "";
+}
+// remove class is-active to hide modal
+function closeModal() {
+  modalEl.classList.remove("is-active");
+}
 
-            var CardContentZipcode = document.createElement("p");
-            CardContentZipcode.classList.add("content");
-            CardContentZipcode.innerHTML = data[i].postal_code;
-            breweryCard.appendChild(CardContentZipcode);
+// making a fetch and then putting content in the modal
+function modalDataRequest(event) {
 
-            var CardContentState = document.createElement("p");
-            CardContentState.classList.add("content");
-            CardContentState.innerHTML = data[i].state;
-            breweryCard.appendChild(CardContentState);
+  openModal();
+  var breweryNameOutput = event.currentTarget.dataset.breweryName;
+  let breweryIndex = parseInt(event.currentTarget.dataset.breweryIndex);
+  var searchRequestUrl = `https://api.openbrewerydb.org/v1/breweries?by_name=${breweryNameOutput.toLowerCase().replace(/ /g, "_")}`;
+  console.log("Brewery URL: ", searchRequestUrl);
+
+  // data fetch request
+  fetch(searchRequestUrl).then(function (response) {
+    if (response.status >= 200 && response.status < 300) {
+      response.json().then(function (data) {
+        console.log("data", data);
+        for (let i = 0; i < data.length; i++){
+          //alters the modal DOM
+          modalTitleId.innerHTML = data[i].name;
+          modalTypeOfBrewery.innerHTML = `Brewery Type: ${data[i].brewery_type}`;
+          modalBreweryAddress.innerHTML = `Address: ${data[i].address_1} <br /> ${data[i].city} ${data[i].state} ${data[i].postal_code}`;
+          modalPhoneNumber.href = `tel: ${data[i].phone}`;
+          modalPhoneNumber.innerHTML = data[i].phone;
+          // modifies existing anchor tag
+          websiteLinkAnchor.href = `${data[i].website_url}`;
+          websiteLinkAnchor.innerHTML = data[i].website_url;
+          if(breweryIndex === searchResultsPerPage - 1){
+            modalNextBtn.disabled = true;
+          }else{
+            modalNextBtn.dataset.brewery = breweries[breweryIndex + 1].name;
+          }
+          if(breweryIndex === 0){
+            modalPrevBtn.disabled = true;
+          }else{
+            modalPrevBtn.dataset.brewery = breweries[breweryIndex - 1].name;
           }
         }
       });
@@ -163,41 +186,19 @@ navPreviousPageBtn.addEventListener("click", function (event) {
   fetchSearchResults();
 });
 
-// open modal
-function modalDataRequest(event) {
-  // add class is-active to show modal
-  modalEl.classList.add("is-active");
-  breweryNameOutput = event.target.textContent;
-  var searchRequestUrl =
-    `https://api.openbrewerydb.org/v1/breweries?by_name=` +
-    breweryNameOutput.toLowerCase().replace(/ /g, "_");
-  console.log("URL: ", searchRequestUrl);
-  // data fetch request
-  fetch(searchRequestUrl).then(function (response) {
-    if (response.status >= 200 && response.status < 300) {
-      response.json().then(function (data) {
-        console.log("data", data);
-        //alters the modal DOM
-        modalTitleId.innerHTML = data[0].name;
-        modalTypeOfBrewery.innerHTML = "Brewery Type: " + data[0].brewery_type;
-        modalBreweryAddress.innerHTML =
-          data[0].address_1 + " " + data[0].city + ", " + data[0].state;
-        modalPhoneNumber.innerHTML = data[0].phone;
-        // modifies existing anchor tag
-        websiteLinkAnchor.setAttribute("href", data[0].website_url);
-        websiteLinkAnchor.innerHTML = data[0].website_url;
-      });
-    }
-  });
-}
+modalNextBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  contentContainerSearchResults.innerHTML = "";
+  currentSearchPage++;
+  fetchSearchResults();
+});
 
-// close modal
-modalCloseBtn.addEventListener("click", closeModal);
-// remove class is-active to hide modal
-function closeModal() {
-  modalEl.classList.remove("is-active");
-  websiteLinkAnchor.innerHTML = "";
-}
+modalPrevBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  contentContainerSearchResults.innerHTML = "";
+  currentSearchPage--;
+  fetchSearchResults();
+});
 
 //-------tasks still needed to be completed------------:
 
