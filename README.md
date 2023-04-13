@@ -34,15 +34,26 @@ https://fevercatdream.github.io/brewery-foolery/
 
 <br />
 
-### Screenshot Desktop View
+### Screenshot Desktop View Brew Search
 ![Screenshot Desktop View](./assets/images/screenshot-desktop-brew-search.png)
 
 <br />
 
-### Screenshot Mobile View
+### Screenshot Mobile View Brew Search
 ![Screenshot Mobile View](./assets/images/screenshot-mobile-brew-search.png)
 
 <br />
+
+### Screenshot Desktop View Bar Trivia
+![Screenshot Desktop View](./assets/images/screenshot-desktop-bar-trivia.png)
+
+<br />
+
+### Screenshot Mobile View Bar Trivia
+![Screenshot Mobile View](./assets/images/screenshot-mobile-bar-trivia.png)
+
+<br />
+
 
 ## Credits
 
