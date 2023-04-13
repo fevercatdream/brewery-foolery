@@ -25,7 +25,7 @@ N/A
 Search for breweries and play bar trivia.
 
 ### Deployed Site
-https://fevercatdream.github.io/project-1/
+https://fevercatdream.github.io/brewery-foolery/
 
 <br />
 
@@ -60,6 +60,8 @@ mdn web docs: https://developer.mozilla.org/en-US/
 Bulma: the modern CSS framework that just works: https://bulma.io/
 
 JavaScript implementation of the Durstenfeld shuffle, an optimized version of Fisher-Yates: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+
+Coolors Color Palette Generator: https://coolors.co/
 
 
 ## License

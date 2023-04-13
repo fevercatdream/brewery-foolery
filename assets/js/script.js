@@ -74,7 +74,9 @@ function fetchSearchResults(){
             breweryCard.classList.add("card");
             breweryCard.dataset.breweryName = data[i].name;
             breweryCard.dataset.breweryIndex = i;
-            breweryCard.addEventListener("click", modalDataRequest);
+            breweryCard.addEventListener("click", function(){
+              modalDataRequest(data[i].name, i);
+            });
             contentContainerSearchResults.appendChild(breweryCard);
 
             var breweryCardHeader = document.createElement("header");
@@ -119,16 +121,15 @@ function closeModal() {
 }
 
 // making a fetch and then putting content in the modal
-function modalDataRequest(event) {
+function modalDataRequest(breweryName, breweryIndex) {
 
   openModal();
-  var breweryNameOutput = event.currentTarget.dataset.breweryName;
-  let breweryIndex = parseInt(event.currentTarget.dataset.breweryIndex);
-  var searchRequestUrl = `https://api.openbrewerydb.org/v1/breweries?by_name=${breweryNameOutput.toLowerCase().replace(/ /g, "_")}`;
-  console.log("Brewery URL: ", searchRequestUrl);
+  
+  var modalSearchRequestUrl = `https://api.openbrewerydb.org/v1/breweries?by_name=${breweryName.toLowerCase().replace(/ /g, "_")}`;
+  console.log("Brewery URL: ", modalSearchRequestUrl);
 
   // data fetch request
-  fetch(searchRequestUrl).then(function (response) {
+  fetch(modalSearchRequestUrl).then(function (response) {
     if (response.status >= 200 && response.status < 300) {
       response.json().then(function (data) {
         console.log("data", data);
@@ -145,12 +146,16 @@ function modalDataRequest(event) {
           if(breweryIndex === searchResultsPerPage - 1){
             modalNextBtn.disabled = true;
           }else{
-            modalNextBtn.dataset.brewery = breweries[breweryIndex + 1].name;
+            modalNextBtn.dataset.breweryName = breweries[breweryIndex + 1].name;
+            modalNextBtn.dataset.breweryIndex = breweryIndex + 1;
+            modalNextBtn.disabled = false;
           }
           if(breweryIndex === 0){
             modalPrevBtn.disabled = true;
           }else{
-            modalPrevBtn.dataset.brewery = breweries[breweryIndex - 1].name;
+            modalPrevBtn.dataset.breweryName = breweries[breweryIndex - 1].name;
+            modalPrevBtn.dataset.breweryIndex = breweryIndex - 1;
+            modalPrevBtn.disabled = false;
           }
         }
       });
@@ -188,16 +193,16 @@ navPreviousPageBtn.addEventListener("click", function (event) {
 
 modalNextBtn.addEventListener("click", function (event) {
   event.preventDefault();
-  contentContainerSearchResults.innerHTML = "";
-  currentSearchPage++;
-  fetchSearchResults();
+  var breweryName = event.currentTarget.dataset.breweryName;
+  let breweryIndex = parseInt(event.currentTarget.dataset.breweryIndex);
+  modalDataRequest(breweryName, breweryIndex);
 });
 
 modalPrevBtn.addEventListener("click", function (event) {
   event.preventDefault();
-  contentContainerSearchResults.innerHTML = "";
-  currentSearchPage--;
-  fetchSearchResults();
+  var breweryName = event.currentTarget.dataset.breweryName;
+  let breweryIndex = parseInt(event.currentTarget.dataset.breweryIndex);
+  modalDataRequest(breweryName, breweryIndex);
 });
 
 //-------tasks still needed to be completed------------:
