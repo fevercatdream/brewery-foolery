@@ -61,6 +61,8 @@ Bulma: the modern CSS framework that just works: https://bulma.io/
 
 JavaScript implementation of the Durstenfeld shuffle, an optimized version of Fisher-Yates: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 
+Coolors Color Palette Generator: https://coolors.co/
+
 
 ## License
 
