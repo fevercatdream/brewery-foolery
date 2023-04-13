@@ -25,7 +25,7 @@ N/A
 Search for breweries and play bar trivia.
 
 ### Deployed Site
-https://fevercatdream.github.io/project-1/
+https://fevercatdream.github.io/brewery-foolery/
 
 <br />
 
