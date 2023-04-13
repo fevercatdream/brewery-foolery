@@ -88,6 +88,7 @@ var modalTypeOfBrewery = document.querySelector("#modal-type-of-brewery");
 var modalBreweryWebsiteLink = document.querySelector(
   "#modal-brewery-website-link"
 );
+websiteLinkAnchor = document.querySelector("#modal-brewery-website-link");
 var modalBreweryAddress = document.querySelector("#modal-brewery-address");
 var modalPhoneNumber = document.querySelector("#modal-phone-number");
 var modalMap = document.querySelector("#modal-map");
@@ -125,7 +126,6 @@ function fetchSearchResults() {
   var searchType = dropdownChoiceCityStateZipcode.value;
   // user search input is the input state, city, or zipcode - example: WA || Seattle || 98101
   var userSearchInput = searchBarInput.value;
-
   // the created url
   var searchRequestUrl = `https://api.openbrewerydb.org/v1/breweries?by_${searchType}=${userSearchInput}&page=${currentSearchPage}&per_page=${searchResultsPerPage}`;
   console.log("URL: ", searchRequestUrl);
@@ -162,6 +162,7 @@ function fetchSearchResults() {
 
             var brewName = document.createElement("p");
             brewName.classList.add("card-header-title");
+            brewName.addEventListener("click", modalDataRequest);
             brewName.innerHTML = data[i].name;
             breweryCardHeader.appendChild(brewName);
 
@@ -220,6 +221,42 @@ navPreviousPageBtn.addEventListener("click", function (event) {
   currentSearchPage--;
   fetchSearchResults();
 });
+
+// open modal
+function modalDataRequest(event) {
+  // add class is-active to show modal
+  modalEl.classList.add("is-active");
+  breweryNameOutput = event.target.textContent;
+  var searchRequestUrl =
+    `https://api.openbrewerydb.org/v1/breweries?by_name=` +
+    breweryNameOutput.toLowerCase().replace(/ /g, "_");
+  console.log("URL: ", searchRequestUrl);
+  // data fetch request
+  fetch(searchRequestUrl).then(function (response) {
+    if (response.status >= 200 && response.status < 300) {
+      response.json().then(function (data) {
+        console.log("data", data);
+        //alters the modal DOM
+        modalTitleId.innerHTML = data[0].name;
+        modalTypeOfBrewery.innerHTML = "Brewery Type: " + data[0].brewery_type;
+        modalBreweryAddress.innerHTML =
+          data[0].address_1 + " " + data[0].city + ", " + data[0].state;
+        modalPhoneNumber.innerHTML = data[0].phone;
+        // modifies existing anchor tag
+        websiteLinkAnchor.setAttribute("href", data[0].website_url);
+        websiteLinkAnchor.innerHTML = data[0].website_url;
+      });
+    }
+  });
+}
+
+// close modal
+modalCloseBtn.addEventListener("click", closeModal);
+// remove class is-active to hide modal
+function closeModal() {
+  modalEl.classList.remove("is-active");
+  websiteLinkAnchor.innerHTML = "";
+}
 
 //-------tasks still needed to be completed------------:
 
