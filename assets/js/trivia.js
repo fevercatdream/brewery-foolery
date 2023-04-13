@@ -1,13 +1,19 @@
 // bar trivia page
 var playBtn = document.querySelector("#play-btn");
-var triviaQuestionContainer = document.querySelector("#trivia-question-container");
+var triviaQuestionContainer = document.querySelector(
+  "#trivia-question-container"
+);
+var triviaDropdownChoice = document.querySelector("#trivia-dropdown-choice");
+
 var triviaQuestion = document.querySelector("#trivia-question");
 var triviaPossibleAnswers = document.querySelector("#trivia-possible-answers");
 var optAnsA = document.querySelector("#opt-ans-a");
 var optAnsB = document.querySelector("#opt-ans-b");
 var optAnsC = document.querySelector("#opt-ans-c");
 var optAnsD = document.querySelector("#opt-ans-d");
-var correctAnswerContainer = document.querySelector("#correct-answer-container");
+var correctAnswerContainer = document.querySelector(
+  "#correct-answer-container"
+);
 var correctAnswer = document.querySelector("#correct-answer");
 var correctAnswerBtn = document.querySelector("#correct-answer-btn");
 var nextQuestionBtn = document.querySelector("#next-question-btn");
@@ -22,31 +28,59 @@ var nextQuestionBtn = document.querySelector("#next-question-btn");
 //fetch correct answer in it's own variable
 
 //these variables are sample variables to test functions
-triviaUserInput = "arts&literature";
-var userInputLowercase = triviaUserInput.toLocaleLowerCase();
-console.log(userInputLowercase);
 
-var triviaRequestUrl =
-  "https://the-trivia-api.com/api/questions?limit=20&categories=" +
-  userInputLowercase;
-console.log(triviaRequestUrl);
+//this function shuffles the answer array index so we get randomzed order of answers
+function shuffleAnswers(fullAnswerArray) {
+  let currentIndex = fullAnswerArray.length,
+    randomIndex;
+  console.log(currentIndex);
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    //shuffles current array
+    [fullAnswerArray[currentIndex], fullAnswerArray[randomIndex]] = [
+      fullAnswerArray[randomIndex],
+      fullAnswerArray[currentIndex],
+    ];
+    //renders the questions to page based on index we shuffled
+    optAnsA.innerHTML = fullAnswerArray[3];
+    console.log("after-shuffle-1", fullAnswerArray[3]);
+    optAnsB.innerHTML = fullAnswerArray[1];
+    console.log("after-shuffle-2", fullAnswerArray[1]);
+    optAnsC.innerHTML = fullAnswerArray[2];
+    console.log("after-shuffle-3", fullAnswerArray[2]);
+    optAnsD.innerHTML = fullAnswerArray[0];
+    console.log("after-shuffle-4", fullAnswerArray[0]);
+  }
+}
 
 function fetchTriviaData() {
+  var triviaUserInput = triviaDropdownChoice.value;
+
+  var triviaRequestUrl =
+    "https://the-trivia-api.com/api/questions?limit=20&categories=" +
+    triviaUserInput;
+  console.log(triviaRequestUrl);
+
   fetch(triviaRequestUrl)
     .then(function (response) {
-      return response.json();
+      if (response.status >= 200 && response.status < 300) {
+        return response.json();
+      }
     })
     .then(function (data) {
       console.log(data);
       for (let index = 0; index < data.length; index++) {
-        var correctAnswerProperty = data[index].correctAnswer;
+        var correctAnswerProperty = [data[index].correctAnswer];
         var incorrectAnswerProperty = data[index].incorrectAnswers;
         var questionProperty = data[index].question;
-        console.log(questionProperty);
-        console.log(correctAnswerProperty);
-        console.log(incorrectAnswerProperty);
-        //have correct properties located and selected, just need to get them out of function, or create/append from within this function
+        var fullAnswerArray = incorrectAnswerProperty.concat(
+          correctAnswerProperty
+        );
       }
+      triviaQuestion.innerHTML = questionProperty;
+      shuffleAnswers(fullAnswerArray);
+      correctAnswer.innerHTML = correctAnswerProperty;
     });
 }
 
@@ -59,16 +93,22 @@ var playTriviaBtn = document.querySelector("#play-btn");
 
 showCorrectAnswerBtn.addEventListener("click", function () {
   console.log("correct answer button is working!");
+  correctAnswerContainer.classList.remove("hidden");
   //need to get data out of fetch requests to complete this function
   //add render function for that data here as well
 });
-nextQuestionBtn.addEventListener("click", function () {
+nextQuestionBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  correctAnswerContainer.classList.add("hidden");
   console.log("next question button is working!");
+  fetchTriviaData();
   //need to get data out of fetch requests to complete this function
   //add render function for that data here as well
 });
 playTriviaBtn.addEventListener("click", function (event) {
   event.preventDefault();
+  correctAnswerContainer.classList.add("hidden");
+  fetchTriviaData();
   console.log("play button is working!");
   //need to get data out of fetch requests to complete this function
   //add render function for that data here as well

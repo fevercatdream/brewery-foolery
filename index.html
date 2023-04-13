@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/bulma.min.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <style>
+        #map {
+          width: 100%;
+          height: 400px;
+          background-color: grey;
+        }
+       </style>
     <title>Brewery Foolery</title>
 </head>
 <body>
@@ -29,8 +36,7 @@
           <input id="search-bar" type="text" placeholder="Search.." name="search">
           <input id="search-button" class="button" type="submit" value="Submit"></input>
         </form>
-
-        <main id="content-container-search-results">
+        <main id="content-container-search-results" class="hidden">
 
         </main>
         <section id="content-container-no-results" class="hidden">
@@ -44,6 +50,22 @@
           </ul>   
           <img src="https://placekitten.com/200/200" alt="image of a kitty" /> 
         </section>
+
+        <div id="map">
+            <script async defer
+                  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIQLae75fbUV6bap_TwAZ6zw32VLNYa28&callback=initMap">
+                  </script>
+                  <script>
+                   function initMap() {
+                       var dumbo = {lat:47.751176, lng:-120.740135};
+                       var mapOptions = {
+                           center: dumbo,
+                           zoom: 7
+                       };
+                       var googlemap = new google.maps.Map(document.getElementById("map"), mapOptions);
+                   }
+               </script>
+              </div>
 
         <nav>
           <a id="pagination-previous-id" class="pagination-previous">Previous</a>
