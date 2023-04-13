@@ -125,9 +125,7 @@ header nav a:hover {
     text-shadow: var(--text-shadow-black-cream);
     
 }
-<div id="brew-navbar-div">
-<a class="button" id="brew-nav-bar-btn" href="./assets/html/bar-trivia-questions.html">Bar Trivia Questions</a>  
-</div>
+
 
 #header h2 {
     display: flex;

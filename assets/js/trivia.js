@@ -31,7 +31,7 @@ var btnContainer = document.querySelector("button-container");
 //fetch correct answer in it's own variable
 
 //these variables are sample variables to test functions
-
+//2nd conflict merge
 //this function shuffles the answer array index so we get randomzed order of answers
 function shuffleAnswers(fullAnswerArray) {
   let currentIndex = fullAnswerArray.length,
