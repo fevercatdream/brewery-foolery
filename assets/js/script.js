@@ -2,8 +2,12 @@
 var dropdownChoiceCityStateZipcode = document.querySelector("#dropdown-choice");
 var searchBarInput = document.querySelector("#search-bar");
 var searchButton = document.querySelector("#search-button");
-var contentContainerSearchResults = document.querySelector("#content-container-search-results");
-var contentContainerNoSearchResults = document.querySelector("#content-container-no-results");
+var contentContainerSearchResults = document.querySelector(
+  "#content-container-search-results"
+);
+var contentContainerNoSearchResults = document.querySelector(
+  "#content-container-no-results"
+);
 
 // array of state name object
 var stateTerritoryNameArr = [
@@ -65,13 +69,13 @@ var stateTerritoryNameArr = [
     WV: "West Virginia",
     WI: "	Wisconsin",
     WY: "Wyoming",
-  }
+  },
 ];
 
 // current search page
-  var currentSearchPage = 1;
-  // how many search results to show per page
-  var searchResultsPerPage = 9;
+var currentSearchPage = 1;
+// how many search results to show per page
+var searchResultsPerPage = 9;
 
 // get all elements with class = card
 var cardEls = document.querySelectorAll(".card");
@@ -81,7 +85,10 @@ var modalEl = document.querySelector(".modal");
 var modalTitleId = document.querySelector("#modal-title-id");
 var modalCloseBtn = document.querySelector("#modal-close");
 var modalTypeOfBrewery = document.querySelector("#modal-type-of-brewery");
-var modalBreweryWebsiteLink = document.querySelector("#modal-brewery-website-link");
+var modalBreweryWebsiteLink = document.querySelector(
+  "#modal-brewery-website-link"
+);
+websiteLinkAnchor = document.querySelector("#modal-brewery-website-link");
 var modalBreweryAddress = document.querySelector("#modal-brewery-address");
 var modalPhoneNumber = document.querySelector("#modal-phone-number");
 var modalMap = document.querySelector("#modal-map");
@@ -114,88 +121,84 @@ contentContainerSearchResults.classList.add("hidden");
 contentContainerNoSearchResults.classList.add("hidden");
 
 // function to fetch brewery data
-function fetchSearchResults(){
-
+function fetchSearchResults() {
   // search type is state || city || postal
   var searchType = dropdownChoiceCityStateZipcode.value;
   // user search input is the input state, city, or zipcode - example: WA || Seattle || 98101
   var userSearchInput = searchBarInput.value;
-
   // the created url
-  var searchRequestUrl = `https://api.openbrewerydb.org/v1/breweries?by_${searchType}=${userSearchInput}&page=${currentSearchPage}&per_page=${searchResultsPerPage}`
+  var searchRequestUrl = `https://api.openbrewerydb.org/v1/breweries?by_${searchType}=${userSearchInput}&page=${currentSearchPage}&per_page=${searchResultsPerPage}`;
   console.log("URL: ", searchRequestUrl);
 
   // data fetch request
-  fetch(searchRequestUrl)
-    .then(function(response){
-      if(response.status >= 200 && response.status < 300){
-        response.json().then(function(data){
-          console.log("data", data);
+  fetch(searchRequestUrl).then(function (response) {
+    if (response.status >= 200 && response.status < 300) {
+      response.json().then(function (data) {
+        console.log("data", data);
 
-          if (data.length === 0){
-            contentContainerNoSearchResults.classList.remove("hidden");
-            contentContainerSearchResults.classList.add("hidden");
-          }else{
-            contentContainerNoSearchResults.classList.add("hidden");
-            contentContainerSearchResults.classList.remove("hidden");
-            for (let i = 0; i < data.length; i++) {
-              console.log(data[i].name);
-              console.log(data[i].state);
-              console.log(data[i].address_1);
-              console.log(data[i].phone);
-              console.log(data[i].city);
-              console.log(data[i].brewery_type);
-              console.log(data[i].website_url);
-              
-              var breweryCard = document.createElement("div");
-              breweryCard.classList.add("card");
-              breweryCard.setAttribute("id", "content-container");
-              contentContainerSearchResults.appendChild(breweryCard);
-              
-              var breweryCardHeader = document.createElement("header");
-              breweryCardHeader.classList.add("card-header");
-              breweryCard.appendChild(breweryCardHeader);
-              
-              var brewName = document.createElement("p");
-              brewName.classList.add("card-header-title");
-              brewName.innerHTML = data[i].name;
-              breweryCardHeader.appendChild(brewName);
-              
-              var modalButton = document.createElement("button");
-              modalButton.classList.add("card-header-icon");
-              breweryCardHeader.appendChild(modalButton);
-              
-              var CardContentDiv = document.createElement("div");
-              CardContentDiv.classList.add("content");
-              breweryCard.setAttribute("id", "search-container-id");
-              breweryCard.appendChild(CardContentDiv);
-              
-              var CardContentStreet = document.createElement("p");
-              CardContentStreet.classList.add("content");
-              CardContentStreet.innerHTML = data[i].address_1;
-              breweryCard.appendChild(CardContentStreet);
-              
-              var CardContentCity = document.createElement("p");
-              CardContentCity.classList.add("content");
-              CardContentCity.innerHTML = data[i].city;
-              breweryCard.appendChild(CardContentCity);
-              
-              var CardContentZipcode = document.createElement("p");
-              CardContentZipcode.classList.add("content");
-              CardContentZipcode.innerHTML = data[i].postal_code;
-              breweryCard.appendChild(CardContentZipcode);
-              
-              var CardContentState = document.createElement("p");
-              CardContentState.classList.add("content");
-              CardContentState.innerHTML = data[i].state;
-              breweryCard.appendChild(CardContentState);
+        if (data.length === 0) {
+          contentContainerNoSearchResults.classList.remove("hidden");
+          contentContainerSearchResults.classList.add("hidden");
+        } else {
+          contentContainerNoSearchResults.classList.add("hidden");
+          contentContainerSearchResults.classList.remove("hidden");
+          for (let i = 0; i < data.length; i++) {
+            console.log(data[i].name);
+            console.log(data[i].state);
+            console.log(data[i].address_1);
+            console.log(data[i].phone);
+            console.log(data[i].city);
+            console.log(data[i].brewery_type);
+            console.log(data[i].website_url);
 
-              
-            }
+            var breweryCard = document.createElement("div");
+            breweryCard.classList.add("card");
+            breweryCard.setAttribute("id", "content-container");
+            contentContainerSearchResults.appendChild(breweryCard);
+
+            var breweryCardHeader = document.createElement("header");
+            breweryCardHeader.classList.add("card-header");
+            breweryCard.appendChild(breweryCardHeader);
+
+            var brewName = document.createElement("p");
+            brewName.classList.add("card-header-title");
+            brewName.addEventListener("click", modalDataRequest);
+            brewName.innerHTML = data[i].name;
+            breweryCardHeader.appendChild(brewName);
+
+            var modalButton = document.createElement("button");
+            modalButton.classList.add("card-header-icon");
+            breweryCardHeader.appendChild(modalButton);
+
+            var CardContentDiv = document.createElement("div");
+            CardContentDiv.classList.add("content");
+            breweryCard.setAttribute("id", "search-container-id");
+            breweryCard.appendChild(CardContentDiv);
+
+            var CardContentStreet = document.createElement("p");
+            CardContentStreet.classList.add("content");
+            CardContentStreet.innerHTML = data[i].address_1;
+            breweryCard.appendChild(CardContentStreet);
+
+            var CardContentCity = document.createElement("p");
+            CardContentCity.classList.add("content");
+            CardContentCity.innerHTML = data[i].city;
+            breweryCard.appendChild(CardContentCity);
+
+            var CardContentZipcode = document.createElement("p");
+            CardContentZipcode.classList.add("content");
+            CardContentZipcode.innerHTML = data[i].postal_code;
+            breweryCard.appendChild(CardContentZipcode);
+
+            var CardContentState = document.createElement("p");
+            CardContentState.classList.add("content");
+            CardContentState.innerHTML = data[i].state;
+            breweryCard.appendChild(CardContentState);
           }
-        })
-      }
-    })
+        }
+      });
+    }
+  });
 }
 
 // ------------------event listeners--------------------
@@ -205,19 +208,55 @@ searchButton.addEventListener("click", function (event) {
   fetchSearchResults();
 });
 
-navNextPageBtn.addEventListener("click", function(event){
+navNextPageBtn.addEventListener("click", function (event) {
   event.preventDefault();
   contentContainerSearchResults.innerHTML = "";
   currentSearchPage++;
   fetchSearchResults();
 });
 
-navPreviousPageBtn.addEventListener("click", function(event){
+navPreviousPageBtn.addEventListener("click", function (event) {
   event.preventDefault();
   contentContainerSearchResults.innerHTML = "";
   currentSearchPage--;
   fetchSearchResults();
 });
+
+// open modal
+function modalDataRequest(event) {
+  // add class is-active to show modal
+  modalEl.classList.add("is-active");
+  breweryNameOutput = event.target.textContent;
+  var searchRequestUrl =
+    `https://api.openbrewerydb.org/v1/breweries?by_name=` +
+    breweryNameOutput.toLowerCase().replace(/ /g, "_");
+  console.log("URL: ", searchRequestUrl);
+  // data fetch request
+  fetch(searchRequestUrl).then(function (response) {
+    if (response.status >= 200 && response.status < 300) {
+      response.json().then(function (data) {
+        console.log("data", data);
+        //alters the modal DOM
+        modalTitleId.innerHTML = data[0].name;
+        modalTypeOfBrewery.innerHTML = "Brewery Type: " + data[0].brewery_type;
+        modalBreweryAddress.innerHTML =
+          data[0].address_1 + " " + data[0].city + ", " + data[0].state;
+        modalPhoneNumber.innerHTML = data[0].phone;
+        // modifies existing anchor tag
+        websiteLinkAnchor.setAttribute("href", data[0].website_url);
+        websiteLinkAnchor.innerHTML = data[0].website_url;
+      });
+    }
+  });
+}
+
+// close modal
+modalCloseBtn.addEventListener("click", closeModal);
+// remove class is-active to hide modal
+function closeModal() {
+  modalEl.classList.remove("is-active");
+  websiteLinkAnchor.innerHTML = "";
+}
 
 //-------tasks still needed to be completed------------:
 
