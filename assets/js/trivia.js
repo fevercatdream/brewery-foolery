@@ -86,7 +86,7 @@ function fetchTriviaData() {
       correctAnswer.innerHTML = correctAnswerProperty;
     });
 }
-
+//merge fix comment
 // ------------------event listeners--------------------
 //commented out cause they throw errors without ID's being on same page
 
