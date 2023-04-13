@@ -193,7 +193,6 @@ navPreviousPageBtn.addEventListener("click", function (event) {
 
 modalNextBtn.addEventListener("click", function (event) {
   event.preventDefault();
-  contentContainerSearchResults.innerHTML = "";
   var breweryName = event.currentTarget.dataset.breweryName;
   let breweryIndex = parseInt(event.currentTarget.dataset.breweryIndex);
   modalDataRequest(breweryName, breweryIndex);
@@ -201,7 +200,6 @@ modalNextBtn.addEventListener("click", function (event) {
 
 modalPrevBtn.addEventListener("click", function (event) {
   event.preventDefault();
-  contentContainerSearchResults.innerHTML = "";
   var breweryName = event.currentTarget.dataset.breweryName;
   let breweryIndex = parseInt(event.currentTarget.dataset.breweryIndex);
   modalDataRequest(breweryName, breweryIndex);
