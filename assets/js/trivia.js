@@ -3,6 +3,9 @@ var playBtn = document.querySelector("#play-btn");
 var triviaQuestionContainer = document.querySelector(
   "#trivia-question-container"
 );
+var triviaContentContainer = document.querySelector(
+  ".content-container-trivia-q"
+);
 var triviaDropdownChoice = document.querySelector("#trivia-dropdown-choice");
 
 var triviaQuestion = document.querySelector("#trivia-question");
@@ -17,7 +20,7 @@ var correctAnswerContainer = document.querySelector(
 var correctAnswer = document.querySelector("#correct-answer");
 var correctAnswerBtn = document.querySelector("#correct-answer-btn");
 var nextQuestionBtn = document.querySelector("#next-question-btn");
-
+var btnContainer = document.querySelector("button-container");
 //function for fetching trivia questions
 // -----
 //fetches trivia questions based on user input from selector drop menu
@@ -43,13 +46,13 @@ function shuffleAnswers(fullAnswerArray) {
       fullAnswerArray[currentIndex],
     ];
     //renders the questions to page based on index we shuffled
-    optAnsA.innerHTML = fullAnswerArray[3];
+    optAnsA.innerHTML = "A.) " + fullAnswerArray[3];
     console.log("after-shuffle-1", fullAnswerArray[3]);
-    optAnsB.innerHTML = fullAnswerArray[1];
+    optAnsB.innerHTML = "B.) " + fullAnswerArray[1];
     console.log("after-shuffle-2", fullAnswerArray[1]);
-    optAnsC.innerHTML = fullAnswerArray[2];
+    optAnsC.innerHTML = "C.) " + fullAnswerArray[2];
     console.log("after-shuffle-3", fullAnswerArray[2]);
-    optAnsD.innerHTML = fullAnswerArray[0];
+    optAnsD.innerHTML = "D.) " + fullAnswerArray[0];
     console.log("after-shuffle-4", fullAnswerArray[0]);
   }
 }
@@ -94,12 +97,16 @@ var playTriviaBtn = document.querySelector("#play-btn");
 showCorrectAnswerBtn.addEventListener("click", function () {
   console.log("correct answer button is working!");
   correctAnswerContainer.classList.remove("hidden");
+  correctAnswerBtn.classList.remove("glow");
+
   //need to get data out of fetch requests to complete this function
   //add render function for that data here as well
 });
 nextQuestionBtn.addEventListener("click", function (event) {
   event.preventDefault();
   correctAnswerContainer.classList.add("hidden");
+  triviaContentContainer.classList.remove("hidden");
+  correctAnswerBtn.classList.add("glow");
   console.log("next question button is working!");
   fetchTriviaData();
   //need to get data out of fetch requests to complete this function
@@ -108,6 +115,10 @@ nextQuestionBtn.addEventListener("click", function (event) {
 playTriviaBtn.addEventListener("click", function (event) {
   event.preventDefault();
   correctAnswerContainer.classList.add("hidden");
+  triviaContentContainer.classList.remove("hidden");
+  nextQuestionBtn.classList.remove("hidden");
+  correctAnswerBtn.classList.remove("hidden");
+  correctAnswerBtn.classList.add("glow");
   fetchTriviaData();
   console.log("play button is working!");
   //need to get data out of fetch requests to complete this function

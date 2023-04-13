@@ -14,9 +14,9 @@
         <h1>Bar Trivia Questions</h1>
         <h2>Play with Friends</h2>
         <nav>
-            <ul>
-                <li><a href="../../index.html">Brewery Search</a></li>
-            </ul>
+          <div id="navbar-div">
+            <a class="button" id="trivia-nav-bar-btn" href="../../index.html">Back to Brewery Search</a>  
+          </div>
         </nav>
     </header>
         <form id="search-container-id" class="search-container">
@@ -36,25 +36,27 @@
           </div>
           <input id="play-btn" class="button" type="submit" value="Play"></input>
         </form>
-        <section id="content-container-trivia-q">
-          <div id="trivia-question-container">
-            <h3>Question:</h3>
-            <p id="trivia-question"></p>
-          </div>
-          <h3>Options:</h3>
-          <div id="trivia-possible-answers">
-            <p id="opt-ans-a"></p>
-            <p id="opt-ans-b"></p>
-            <p id="opt-ans-c"></p>
-            <p id="opt-ans-d"></p>
-          </div>
+        <div class="content-container-trivia-q hidden">
+          <div>
+            <h3 id="question-text"></h3>
+            <p id="trivia-question" ></p>
+            <ol id="trivia-possible-answers">
+              <li id="opt-ans-a"></li> 
+              <li id="opt-ans-b"></li> 
+              <li id="opt-ans-c"></li> 
+              <li id="opt-ans-d"></li> 
+          </ol>
           <div id="correct-answer-container" class="hidden">
             <h3>Correct Answer:</h3>
             <p id="correct-answer"></p>
+          <h3></h3>
           </div>
-          <input id="correct-answer-btn" class="button" type="submit" value="Correct Answer"></input>
-          <input id="next-question-btn" class="button" type="submit" value="Next Question"></input>
-        </section>
+          </div>
+        </div>
+        <div class="button-container">
+        <input id="correct-answer-btn" class="button hidden" type="submit" value="Correct Answer"></input><br>
+        <input id="next-question-btn" class="button hidden" type="submit" value="Next Question"></input>
+      </div>
     <footer id="footer">
         <div class="content has-text-centered">
           <p>
