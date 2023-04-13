@@ -36,7 +36,22 @@ var modalNextBtn = document.querySelector("#modal-next-btn");
 var navPreviousPageBtn = document.querySelector("#pagination-previous-id");
 var navNextPageBtn = document.querySelector("#pagination-next-id");
 
-var cardEls = document.querySelectorAll(".card");
+// open modal
+for (var i = 0; i < cardEls.length; i++) {
+  var cardEl = cardEls[i];
+  cardEl.addEventListener("click", openModal);
+}
+// close modal
+modalCloseBtn.addEventListener("click", closeModal);
+// add class is-active to show modal
+function openModal() {
+  modalEl.classList.add("is-active");
+}
+// remove class is-active to hide modal
+function closeModal() {
+  modalEl.classList.remove("is-active");
+}
+
 // function to fetch brewery data
 function fetchSearchResults() {
   // search type is state || city || postal
@@ -74,7 +89,6 @@ function fetchSearchResults() {
 
           var brewName = document.createElement("p");
           brewName.classList.add("card-header-title");
-          brewName.addEventListener("click", modalDataRequest);
           brewName.innerHTML = data[i].name;
           breweryCardHeader.appendChild(brewName);
 
@@ -116,14 +130,12 @@ function fetchSearchResults() {
 searchButton.addEventListener("click", function (event) {
   event.preventDefault();
   contentContainerSearchResults.innerHTML = "";
-  contentContainerNoSearchResults.innerHTML = "";
   fetchSearchResults();
 });
 
 navNextPageBtn.addEventListener("click", function (event) {
   event.preventDefault();
   contentContainerSearchResults.innerHTML = "";
-  contentContainerNoSearchResults.innerHTML = "";
   currentSearchPage++;
   fetchSearchResults();
 });
@@ -131,7 +143,6 @@ navNextPageBtn.addEventListener("click", function (event) {
 navPreviousPageBtn.addEventListener("click", function (event) {
   event.preventDefault();
   contentContainerSearchResults.innerHTML = "";
-  contentContainerNoSearchResults.innerHTML = "";
   currentSearchPage--;
   fetchSearchResults();
 });
