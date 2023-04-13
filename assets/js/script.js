@@ -2,75 +2,12 @@
 var dropdownChoiceCityStateZipcode = document.querySelector("#dropdown-choice");
 var searchBarInput = document.querySelector("#search-bar");
 var searchButton = document.querySelector("#search-button");
-var contentContainerSearchResults = document.querySelector(
-  "#content-container-search-results"
-);
-var contentContainerNoSearchResults = document.querySelector(
-  "#content-container-no-results"
-);
-
-// array of state name object
-var stateTerritoryNameArr = [
-  {
-    AL: "Alabama",
-    AK: "Alaska",
-    AZ: "Arizona",
-    AR: "Arkansas",
-    AS: "American Samoa",
-    CA: "California",
-    CO: "Colorado",
-    CT: "Connecticut",
-    DE: "Delaware",
-    DC: "District of Columbia",
-    FL: "Florida",
-    GA: "Georgia",
-    GU: "Guam",
-    HI: "Hawaii",
-    ID: "Idaho",
-    IL: "Illinois",
-    IN: "Indiana",
-    IA: "Iowa",
-    KS: "Kansas",
-    KY: "Kentucky",
-    LA: "Louisiana",
-    ME: "Maine",
-    MD: "Maryland",
-    MA: "Massachusetts",
-    MI: "Michigan",
-    MN: "Minnesota",
-    MS: "Mississippi",
-    MO: "Missouri",
-    MT: "Montana",
-    NE: "Nebraska",
-    NV: "Nevada",
-    NH: "New Hampshire",
-    NJ: "New Jersey",
-    NM: "New Mexico",
-    NY: "New York",
-    NC: "North Carolina",
-    ND: "North Dakota",
-    MP: "Northern Mariana Islands",
-    OH: "Ohio",
-    OK: "Oklahoma",
-    OR: "Oregon",
-    PA: "Pennsylvania",
-    PR: "Puerto Rico",
-    RI: "Rhode Island",
-    SC: "South Carolina",
-    SD: "South Dakota",
-    TN: "Tennessee",
-    TX: "Texas",
-    TT: "Trust Territories",
-    UT: "Utah",
-    VT: "Vermont",
-    VA: "Virginia",
-    VI: "Virgin Islands",
-    WA: "Washington",
-    WV: "West Virginia",
-    WI: "	Wisconsin",
-    WY: "Wyoming",
-  },
-];
+var contentContainerSearchResults = document.querySelector("#content-container-search-results");
+var contentContainerNoSearchResults = document.querySelector("#content-container-no-results");
+// search type is state || city || postal
+var searchType;
+// user search input is the input state, city, or zipcode - example: WA || Seattle || 98101
+var userSearchInput;
 
 // current search page
 var currentSearchPage = 1;
@@ -121,11 +58,8 @@ contentContainerSearchResults.classList.add("hidden");
 contentContainerNoSearchResults.classList.add("hidden");
 
 // function to fetch brewery data
-function fetchSearchResults() {
-  // search type is state || city || postal
-  var searchType = dropdownChoiceCityStateZipcode.value;
-  // user search input is the input state, city, or zipcode - example: WA || Seattle || 98101
-  var userSearchInput = searchBarInput.value;
+function fetchSearchResults(){
+
   // the created url
   var searchRequestUrl = `https://api.openbrewerydb.org/v1/breweries?by_${searchType}=${userSearchInput}&page=${currentSearchPage}&per_page=${searchResultsPerPage}`;
   console.log("URL: ", searchRequestUrl);
@@ -205,6 +139,13 @@ function fetchSearchResults() {
 searchButton.addEventListener("click", function (event) {
   event.preventDefault();
   contentContainerSearchResults.innerHTML = "";
+
+  // search type is state || city || postal
+  searchType = dropdownChoiceCityStateZipcode.value;
+
+  // user search input is the input state, city, or zipcode - example: WA || Seattle || 98101
+  userSearchInput = searchBarInput.value.trim().toLowerCase();
+
   fetchSearchResults();
 });
 
