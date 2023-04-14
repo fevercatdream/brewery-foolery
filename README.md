@@ -2,7 +2,7 @@
 
 ## Description
 
-
+Brewery attendance has skyrocketed in the last handful of years, and we wanted to create a one-stop-shop for locating the right fit for you. As well as enjoy time with your friends and other brew-ficianados – with a fun game of trivia! This website accesses 2 versatile API's, with a plethora of data ready at your fingertips. Giving you three different criteria to filter search results on our brewery API: city, state, and zipcode it's easy to pinpoint a brewery close to you! Our trivia page offers 10 unique categories to choose from, and hides the correct answer until it's time to reveal. Endless entertainment!
 
 ## User Story
 
@@ -17,7 +17,20 @@ I’d like to keep me and my friends entertained with a game of trivia with mult
 
 ## Acceptance Criteria
 
-```
+```Given the user navigates to the homepage
+
+when the user select a city, state or zipcode,
+
+and input their, or any respective location in the united states
+
+then the user gets a list of breweries near that location with details about each brewery
+
+given the user navigates to the trivia page
+
+when the user selects a category of trivia
+
+then the user gets a random question and answer options
+
 
 ```
 
@@ -30,35 +43,40 @@ N/A
 Search for breweries and play bar trivia.
 
 ### Deployed Site
+
 https://fevercatdream.github.io/brewery-foolery/
 
 <br />
 
 ### Wireframe
+
 ![wireframe](./assets/images/wireframe-diff-page-views-brewery-info.png)
 
 <br />
 
 ### Screenshot Desktop View Brew Search
+
 ![Screenshot Desktop View](./assets/images/screenshot-desktop-brew-search.png)
 
 <br />
 
 ### Screenshot Mobile View Brew Search
+
 ![Screenshot Mobile View](./assets/images/screenshot-mobile-brew-search.png)
 
 <br />
 
 ### Screenshot Desktop View Bar Trivia
+
 ![Screenshot Desktop View](./assets/images/screenshot-desktop-bar-trivia.png)
 
 <br />
 
 ### Screenshot Mobile View Bar Trivia
+
 ![Screenshot Mobile View](./assets/images/screenshot-mobile-bar-trivia.png)
 
 <br />
-
 
 ## Credits
 
@@ -69,7 +87,6 @@ Tutor: Doug Kumagai:
 https://www.linkedin.com/in/doug-kumagai/
 <br />
 https://github.com/ndesmic
-
 
 mdn web docs: https://developer.mozilla.org/en-US/
 
@@ -86,7 +103,6 @@ Open Brewery DB API: https://www.openbrewerydb.org/
 The Trivia API: https://the-trivia-api.com/
 
 Placebeer Image Placeholder: https://placebeer.com/
-
 
 ## License
 
